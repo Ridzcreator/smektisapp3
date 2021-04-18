@@ -18,8 +18,10 @@ class Transaksi extends CI_Controller
 
     	$side['title'] = "Data Transaksi";
 
+        $data['transaksi'] = $this->transaksi_model->getDataTransaksi()->result();
+
         $this->load->view('_include/sidebar', $side);
-        $this->load->view('admin/data_transaksi');
+        $this->load->view('admin/data_transaksi', $data);
         $this->load->view('_include/footer');
     }
 }
