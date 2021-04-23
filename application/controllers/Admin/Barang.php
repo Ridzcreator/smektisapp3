@@ -1,5 +1,5 @@
 <?php
-class Dashboard extends CI_Controller
+class Barang extends CI_Controller
 {
     function __construct()
     {
@@ -15,10 +15,10 @@ class Dashboard extends CI_Controller
         // verifikasi apakah user sudah login
         $this->auth->isLoggedIn();
 
-        $side['title'] = "Dashboard";
+        $side['title'] = "Data Barang";
 
         $this->load->view('_include/sidebar', $side);
-        $this->load->view('admin/dashboard');
+        $this->load->view('admin/data_barang');
         $this->load->view('_include/footer');
     }
 }

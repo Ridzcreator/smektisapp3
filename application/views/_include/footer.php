@@ -1,56 +1,67 @@
     <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
+      <div class="float-right d-none d-sm-block">
+        <b>Version</b> 3.1.0-rc
+      </div>
+      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+    <!-- ./wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/jquery/jquery.min.js') ?>"></script>
+    <!-- Bootstrap 4 -->
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/jszip/jszip.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/pdfmake/pdfmake.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/pdfmake/vfs_fonts.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script src="<?php echo base_url('vendor/AdminLTE/dist/js/adminlte.min.js') ?>"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="<?php echo base_url('vendor/AdminLTE/dist/js/demo.js') ?>"></script>
+    <!-- Page specific script -->
+    <script>
+      $(function() {
+        $("#example1").DataTable({
+          "responsive": true,
+          "lengthChange": false,
+          "autoWidth": false,
+          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+      });
+    </script>
+    <!-- date picker js -->
+    <script type="text/javascript">
+      $(function() {
+        $('#datetimepicker').datetimepicker();
+      })
+    </script>
+    </body>
 
-<!-- jQuery -->
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/jquery/jquery.min.js') ?>"></script>
-<!-- Bootstrap 4 -->
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-<!-- DataTables  & Plugins -->
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/jszip/jszip.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/pdfmake/pdfmake.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/pdfmake/vfs_fonts.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
-<script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url('vendor/AdminLTE/dist/js/adminlte.min.js') ?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url('vendor/AdminLTE/dist/js/demo.js') ?>"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-</body>
-</html>
+    </html>
