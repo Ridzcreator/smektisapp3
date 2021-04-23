@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2021 at 08:56 AM
+-- Generation Time: Apr 23, 2021 at 04:11 PM
 -- Server version: 5.7.28
--- PHP Version: 7.2.2
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,6 +44,27 @@ CREATE TABLE `barang` (
 INSERT INTO `barang` (`id`, `user_id`, `kategori_id`, `nama`, `harga`, `stok`, `keterangan`) VALUES
 (1, 1, 1, 'Canon EOS 60D', 125000, 1, 'Boleh dipinjam kapan saja'),
 (2, 1, 1, 'Sony A7ii', 250000, 1, 'Boleh dipinjam kapan saja');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barang_pinjam`
+--
+
+CREATE TABLE `barang_pinjam` (
+  `id` int(11) NOT NULL,
+  `transaksi_id` int(11) NOT NULL,
+  `barang_id` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `barang_pinjam`
+--
+
+INSERT INTO `barang_pinjam` (`id`, `transaksi_id`, `barang_id`, `jumlah`) VALUES
+(1, 1, 1, 1),
+(2, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +138,6 @@ CREATE TABLE `transaksi` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `penyewa_id` int(11) NOT NULL,
-  `barang_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
   `tanggal_pinjam` datetime NOT NULL,
   `durasi` float NOT NULL,
@@ -129,8 +149,10 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id`, `user_id`, `penyewa_id`, `barang_id`, `status_id`, `tanggal_pinjam`, `durasi`, `jaminan`, `tanggal_kembali`) VALUES
-(1, 1, 1, 1, 2, '2021-04-17 17:06:26', 0.5, 'KTP;BPJS', NULL);
+INSERT INTO `transaksi` (`id`, `user_id`, `penyewa_id`, `status_id`, `tanggal_pinjam`, `durasi`, `jaminan`, `tanggal_kembali`) VALUES
+(1, 1, 1, 2, '2021-04-17 17:06:26', 0.5, 'KTP;BPJS', NULL),
+(2, 1, 1, 1, '2021-04-23 23:08:00', 1, 'BPJS', NULL),
+(3, 1, 1, 1, '2021-04-23 23:08:00', 1, 'BPJS', NULL);
 
 -- --------------------------------------------------------
 
@@ -166,6 +188,14 @@ ALTER TABLE `barang`
   ADD KEY `kategori_id` (`kategori_id`);
 
 --
+-- Indexes for table `barang_pinjam`
+--
+ALTER TABLE `barang_pinjam`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `transaksi_id` (`transaksi_id`),
+  ADD KEY `barang_id` (`barang_id`);
+
+--
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
@@ -191,7 +221,6 @@ ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `penyewa_id` (`penyewa_id`),
-  ADD KEY `barang_id` (`barang_id`),
   ADD KEY `status_id` (`status_id`);
 
 --
@@ -209,6 +238,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `barang_pinjam`
+--
+ALTER TABLE `barang_pinjam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -233,7 +268,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -253,6 +288,13 @@ ALTER TABLE `barang`
   ADD CONSTRAINT `barang_ibfk_2` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `barang_pinjam`
+--
+ALTER TABLE `barang_pinjam`
+  ADD CONSTRAINT `barang_pinjam_ibfk_1` FOREIGN KEY (`transaksi_id`) REFERENCES `transaksi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_pinjam_ibfk_2` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `penyewa`
 --
 ALTER TABLE `penyewa`
@@ -264,7 +306,6 @@ ALTER TABLE `penyewa`
 ALTER TABLE `transaksi`
   ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`penyewa_id`) REFERENCES `penyewa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `transaksi_ibfk_4` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

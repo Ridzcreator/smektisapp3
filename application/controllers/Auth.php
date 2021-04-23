@@ -29,12 +29,14 @@ class Auth extends CI_Controller
 		$users = $this->user_model->getUser()->result();
 
 		$pesan = 'username';
+		$loginUser = null;
 
 		foreach ($users as $user) {
 			if ($user->username == $username) {
 				$pesan = 'password';
 				if ($user->password == $password_md5) {
 					$pesan = $user->tipe;
+					$loginUser = $user;
 				}
 			}
 		}
@@ -44,6 +46,7 @@ class Auth extends CI_Controller
 			    session_start();
 			}
 			$_SESSION["username"] = $username;
+			$_SESSION["user_id"] = $user->id;
 			return redirect('admin/dashboard');
 		}
 		else {
@@ -59,6 +62,7 @@ class Auth extends CI_Controller
 		    session_start();
 		}
 		unset($_SESSION["username"]);
+		unset($_SESSION["user_id"]);
 		session_destroy();
 
 		return redirect('auth');
