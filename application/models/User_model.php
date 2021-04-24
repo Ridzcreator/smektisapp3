@@ -6,6 +6,7 @@ class User_model extends CI_Model
         $this->db->select('*');
         $this->db->from('user');
         $query = $this->db->get();
-        return $query;
+
+        return $query->result();
     }
 }

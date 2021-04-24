@@ -4,11 +4,12 @@ class Transaksi extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('penyewa_model');
         $this->load->model('transaksi_model');
-        $this->load->model('barang_pinjam_model');
         $this->load->model('kategori_model');
         $this->load->model('barang_model');
         $this->load->model('status_model');
+        $this->load->model('barang_pinjam_model');
 
         // load auth controller
         require(APPPATH . 'controllers/Auth.php');
@@ -26,11 +27,12 @@ class Transaksi extends CI_Controller
 
         $side['title'] = "Data Transaksi";
 
-        $data['transaksi'] = $this->transaksi_model->getDataTransaksi()->result();
-        $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id'])->result();
-        $data['master_kategori'] = $this->kategori_model->getMaster()->result();
-        $data['master_barang'] = $this->barang_model->getMaster()->result();
-        $data['master_status'] = $this->status_model->getMaster()->result();
+        $data['master_penyewa'] = $this->penyewa_model->getMaster();
+        $data['transaksi'] = $this->transaksi_model->getDataTransaksi();
+        $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id']);
+        $data['master_kategori'] = $this->kategori_model->getMaster();
+        $data['master_barang'] = $this->barang_model->getMaster();
+        $data['master_status'] = $this->status_model->getMaster();
 
         $this->load->view('_include/sidebar', $side);
         $this->load->view('admin/data_transaksi', $data);
@@ -52,7 +54,58 @@ class Transaksi extends CI_Controller
             'jaminan' => $this->input->post('jaminan')
         );
 
-        $this->transaksi_model->create($dataTransaksi);
+        $transaksi_id = $this->transaksi_model->create($dataTransaksi);
+
+        $barang_pinjam = array_count_values($this->input->post('barang_pinjam_ids'));
+        foreach ($barang_pinjam as $key => $value) {
+            $dataBarang = array(
+                'transaksi_id' => $transaksi_id,
+                'barang_id' => $key,
+                'jumlah' => $value,
+            );
+            
+            $this->barang_pinjam_model->create($dataBarang);
+        }
+
+        redirect('admin/transaksi/index');
+    }
+
+    public function update($transaksi_id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $dataTransaksi = array(
+            'penyewa_id' => $this->input->post('penyewa_id' . $transaksi_id),
+            'status_id' => $this->input->post('status_id' . $transaksi_id),
+            'durasi' => $this->input->post('durasi' . $transaksi_id),
+            'jaminan' => $this->input->post('jaminan' . $transaksi_id)
+        );
+
+        $this->transaksi_model->update($transaksi_id, $dataTransaksi);
+
+        if ($barang_pinjam = array_count_values($this->input->post('barang_pinjam_ids'))) {
+            $this->barang_pinjam->deleteByTransaksi($transaksi_id);
+
+            foreach ($barang_pinjam as $key => $value) {
+                $dataBarang = array(
+                    'transaksi_id' => $transaksi_id,
+                    'barang_id' => $key,
+                    'jumlah' => $value,
+                );
+                
+                $this->barang_pinjam_model->create($dataBarang);
+            }
+        }
+
+        redirect('admin/transaksi/index');
+    }
+
+    public function destroy() {
+        $id = $this->input->post('id');
+
+        $this->transaksi_model->delete($id);
 
         redirect('admin/transaksi/index');
     }

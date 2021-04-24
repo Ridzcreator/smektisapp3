@@ -26,7 +26,7 @@ class Auth extends CI_Controller
 		$password = $this->input->post('password');
 		$password_md5 = md5($password);
 
-		$users = $this->user_model->getUser()->result();
+		$users = $this->user_model->getUser();
 
 		$pesan = 'username';
 		$loginUser = null;

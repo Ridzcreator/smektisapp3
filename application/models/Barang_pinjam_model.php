@@ -9,6 +9,21 @@ class Barang_pinjam_model extends CI_Model
         $this->db->join('barang', 'barang_pinjam.barang_id = barang.id');
         $this->db->where("transaksi.user_id = $user_id");
         $query = $this->db->get();
-        return $query;
+
+        return $query->result();
+    }
+
+    public function create($data)
+    {
+        $this->db->insert('barang_pinjam', $data);
+        $insert_id = $this->db->insert_id();
+
+        return $insert_id;
+    }
+
+    public function deleteByTransaksi($transaksi_id)
+    {
+        $this->db->where('transaksi_id', $transaksi_id);
+        $this->db->delete('barang_pinjam');
     }
 }

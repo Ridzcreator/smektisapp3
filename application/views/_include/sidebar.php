@@ -22,6 +22,8 @@ if (session_status() == PHP_SESSION_NONE) {
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/dist/css/adminlte.min.css'); ?>">
+
+  <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/plugins/select2/css/select2.min.css'); ?>">
 </head>
 
 <body class="hold-transition sidebar-mini">

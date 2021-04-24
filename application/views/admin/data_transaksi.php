@@ -55,7 +55,7 @@
                                                 $transaksi_barang[$no - 1] = [];
                                                 foreach ($barang_pinjam as $b) {
                                                     if ($b->t_id == $data->t_id) {
-                                                        array_push($transaksi_barang[$no - 1], $b->nama);
+                                                        array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
                                                     }
                                                 }
                                                 echo implode(', ', $transaksi_barang[$no - 1]);
@@ -69,14 +69,97 @@
                                                 <a class="text-link text-primary" href="#" title="Detail">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
-                                                <a class="text-link text-success" href="#" title="Edit">
+                                                <a class="text-link text-success" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $data->t_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a class="text-link text-danger" href="#" title="Hapus">
+                                                <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $data->t_id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
+
+                                        <!-- Edit Modal -->
+                                        <div class="modal fade" id="editModal<?= $data->t_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="<?php echo base_url('admin/transaksi/update/'.$data->t_id); ?>" method="post">
+                                                            <div class="form-group">
+                                                                <label for="penyewa_id">Penyewa</label>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="custom-select" name="penyewa_id<?= $data->t_id; ?>" id="inputGroupSelect01">
+                                                                        <option selected disabled value="">Pilih Penyewa</option>
+                                                                        <?php
+                                                                        foreach ($master_penyewa as $penyewa) {
+                                                                        ?>
+                                                                            <option value="<?= $penyewa->id; ?>" <?= $data->penyewa_id == $penyewa->id ? 'selected' : ''; ?>><?= $penyewa->nama; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="durasi">Durasi (hari)</label>
+                                                                <input type="number" class="form-control" name="durasi<?= $data->t_id; ?>" placeholder="Masukkan durasi" value="<?= $data->durasi; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="status_id">Status</label>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="custom-select" name="status_id<?= $data->t_id; ?>" id="inputGroupSelect01">
+                                                                        <option selected disabled value="">Pilih Status Transaksi</option>
+                                                                        <?php
+                                                                        foreach ($master_status as $status) {
+                                                                        ?>
+                                                                            <option value="<?= $status->id; ?>" <?= $data->status_id == $status->id ? 'selected' : ''; ?>><?= $status->nama; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="jaminan">Jaminan</label>
+                                                                <input type="text" class="form-control" name="jaminan<?= $data->t_id; ?>" placeholder="Masukkan jaminan (contoh: KTP,BPJS)" value="<?= $data->jaminan; ?>">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Edit Modal -->
+
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="hapusModal<?= $data->t_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Hapus <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h3>Apakah anda yakin ingin menghapus transaksi ini?</h3>
+                                                        <form action="<?php echo base_url('admin/transaksi/destroy'); ?>" method="post">
+                                                            <div class="form-group" hidden>
+                                                                <label for="id">ID Transaksi</label>
+                                                                <input type="number" class="form-control" name="id" value="<?= $data->t_id; ?>">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Delete Modal -->
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -91,7 +174,7 @@
         </div>
         <!-- /.container-fluid -->
 
-        <!-- Modal -->
+        <!-- Add Modal -->
         <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -101,14 +184,24 @@
                     <div class="modal-body">
                         <form action="<?php echo base_url('admin/transaksi/store'); ?>" method="post">
                             <div class="form-group">
-                                <label for="penyewa_id">Penyewa ID</label>
-                                <input type="number" class="form-control" name="penyewa_id" placeholder="Masukkan nama penyewa_id">
+                                <label for="penyewa_id">Penyewa</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="penyewa_id" id="inputGroupSelect01">
+                                        <option selected disabled value="">Pilih Penyewa</option>
+                                        <?php
+                                        foreach ($master_penyewa as $penyewa) {
+                                        ?>
+                                            <option value="<?= $penyewa->id; ?>"><?= $penyewa->nama; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="kategori_id">Kategori Barang</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="kategori_id" id="inputGroupSelect01" onchange="pilihKategori(this)">
-                                        <option selected disabled value="">Pilih Kategori Barang</option>
+                                    <select class="select2" name="kategori_ids[]" multiple="multiple" data-placeholder="Pilih Kategori Barang" id="pilihanKategori" style="width: 100%;" onchange="pilihKategori()">
                                         <?php
                                         foreach ($master_kategori as $kategori) {
                                         ?>
@@ -119,14 +212,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="barang_id">Pilih Barang</label>
-                                <div class="input-group mb-3" id="pilihanBarang">
-                                    <select class='custom-select' name='barang_id' id='inputGroupSelect01'>
-                                        <option selected disabled value=''>Pilih Barang Sewa</option>
-                                    </select>
-                                </div>
-                                <button type="button" class="btn btn-info">Tambah</button>
+                            <div class="form-group" id="formPilihBarang" style="display: none;">
+                                <label>Barang Sewa</label>
+                                <select class="select2" name="barang_pinjam_ids[]" multiple="multiple" data-placeholder="Pilih Barang Sewa" style="width: 100%;" id="pilihanBarangSewa">
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="tanggal_pinjam">Tanggal Pinjam</label>
@@ -139,7 +228,7 @@
                                 <input type="number" class="form-control" name="durasi" placeholder="Masukkan durasi">
                             </div>
                             <div class="form-group">
-                                <label for="status_id">Pilih Status</label>
+                                <label for="status_id">Status</label>
                                 <div class="input-group mb-3">
                                     <select class="custom-select" name="status_id" id="inputGroupSelect01">
                                         <option selected disabled value="">Pilih Status Transaksi</option>
@@ -155,7 +244,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="jaminan">Jaminan</label>
-                                <input type="nama" class="form-control" name="jaminan" placeholder="Masukkan jaminan (contoh: KTP,BPJS)">
+                                <input type="text" class="form-control" name="jaminan" placeholder="Masukkan jaminan (contoh: KTP,BPJS)">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -166,32 +255,37 @@
                 </div>
             </div>
         </div>
+        <!-- End Add Modal -->
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 <script type="text/javascript">
-    function pilihKategori(object) {
-        if (object.value) {
-            this.cetakPilihanBarang(object.value);
+    var kategori = [];
+    var barang = {};
+
+    function pilihKategori() {
+        if (this.kategori = $("#pilihanKategori").val()) {
+            this.cetakPilihanBarang();
+            document.getElementById("formPilihBarang").style.display = "block";
         }
     }
 
-    function cetakPilihanBarang(kategori) {
+    function cetakPilihanBarang() {
         <?php
-        echo "var barang = " . json_encode($master_barang) . ";";
+        echo "this.barang = " . json_encode($master_barang) . ";";
         ?>
 
-        var pilihan = "<select class='custom-select' id='inputGroupSelect01'><option selected disabled value=''>Pilih Barang Sewa</option>";
+        var pilihan = '';
 
-        barang.forEach(function(element) {
-            if (element.kategori_id == kategori) {
-                pilihan += "<option value='" + element.id + "'>" + element.nama + "</option>";
+        this.barang.forEach(function(element) {
+            if (this.kategori.includes(element.kategori_id)) {
+                for(let i = 0; i < element.stok; i++){
+                    pilihan += "<option value='" + element.id + "'>" + element.nama + "</option>";
+                }
             }
         });
 
-        pilihan += "</select>";
-
-        document.getElementById("pilihanBarang").innerHTML = pilihan;
+        document.getElementById("pilihanBarangSewa").innerHTML = pilihan;
     }
 </script>
