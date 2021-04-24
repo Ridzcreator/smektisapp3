@@ -1,19 +1,19 @@
 <?php
 class Transaksi extends CI_Controller
 {
-	function __construct()
-	{
-		parent::__construct();
+    function __construct()
+    {
+        parent::__construct();
         $this->load->model('transaksi_model');
         $this->load->model('barang_pinjam_model');
         $this->load->model('kategori_model');
         $this->load->model('barang_model');
-		$this->load->model('status_model');
+        $this->load->model('status_model');
 
-		// load auth controller
-    	require (APPPATH.'controllers/Auth.php');
-        $this->auth = new Auth(); 
-	}
+        // load auth controller
+        require(APPPATH . 'controllers/Auth.php');
+        $this->auth = new Auth();
+    }
 
     public function index()
     {
@@ -21,10 +21,10 @@ class Transaksi extends CI_Controller
             session_start();
         }
 
-    	// verifikasi apakah user sudah login
+        // verifikasi apakah user sudah login
         $this->auth->isLoggedIn();
 
-    	$side['title'] = "Data Transaksi";
+        $side['title'] = "Data Transaksi";
 
         $data['transaksi'] = $this->transaksi_model->getDataTransaksi()->result();
         $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id'])->result();
@@ -37,7 +37,8 @@ class Transaksi extends CI_Controller
         $this->load->view('_include/footer');
     }
 
-    public function store() {
+    public function store()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }

@@ -27,7 +27,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-dark-primary navbar-dark">
       <!-- Left navbar links -->
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -72,10 +72,14 @@ if (session_status() == PHP_SESSION_NONE) {
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-light-yellow elevation-4">
       <!-- Brand Logo -->
-      <a href="vendor/AdminLTE/index3.html" class="brand-link">
-        <img src="<?php echo base_url('assets/img/logo_bee.png'); ?>" alt="AdminLTE Logo" class="img-fluid ">
+      <br>
+      <a href="../admin/dashboard" class="brand-link">
+        <div class="text-center">
+          <img src="<?php echo base_url('assets/img/logo_bee.png'); ?>" alt="Bee Movie Logo" class="img-fluid" width="50%">
+        </div>
+        <h4 style="text-align:center;">Bee Movie</h4><br>
         <!-- <span class="brand-text font-weight-light">Bee Movie</span> -->
       </a>
 
@@ -89,31 +93,31 @@ if (session_status() == PHP_SESSION_NONE) {
                with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link <?= $title == 'Dashboard' ? 'active' : ''; ?>">
-                <i class="nav-icon far fa-image"></i>
+                <i class="nav-icon fa fa-home"></i>
                 <p> | Dashboard</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('admin/barang'); ?>" class="nav-link <?= $title == 'Data Barang' ? 'active' : ''; ?>">
-                <i class="nav-icon far fa-image"></i>
+                <i class="nav-icon fa fa-briefcase"></i>
                 <p> | Data Barang</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('admin/transaksi'); ?>" class="nav-link <?= $title == 'Data Transaksi' ? 'active' : ''; ?>">
-                <i class="nav-icon far fa-image"></i>
+                <i class="nav-icon fa fa-cart-plus"></i>
                 <p> | Data Transaksi</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('admin/penyewa'); ?>" class="nav-link <?= $title == 'Data Penyewa' ? 'active' : ''; ?>">
-                <i class="nav-icon far fa-image"></i>
+                <i class="nav-icon fa fa-address-card"></i>
                 <p> | Data Penyewa</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('admin/laporan'); ?>" class="nav-link <?= $title == 'Laporan' ? 'active' : ''; ?>">
-                <i class="nav-icon far fa-image"></i>
+                <i class="nav-icon fa fa-file"></i>
                 <p> | Laporan</p>
               </a>
             </li>

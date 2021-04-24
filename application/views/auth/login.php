@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../../../assets/css/login.css"> -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/login.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/login/vendor/bootstrap/css/bootstrap.min.css'); ?>">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
@@ -13,17 +14,15 @@
 </head>
 
 <body>
-    <!-- <img class="wave" src="img/wave.png"> -->
     <div class="container">
         <div class="img">
-            
-            <!-- <img src="assets/img/logo_bee.png"> -->
         </div>
-        <div class="login-content">
+        <div class="login-content justify-content-center align-item-center h-100">
             <form method="post" action="<?php echo base_url() . 'auth/verify'; ?>">
                 <div><img src="<?php echo base_url('assets/img/logo_bee.png'); ?>"></div>
                 <div>
-                    <h2 class="title">Silahkan Login Dulu</h2>
+                    <br><br><br>
+                    <h2 class="title" style="text-align:center;">Silahkan Login Dulu</h2>
                 </div>
                 <div class="input-div one">
                     <div class="i">

@@ -18,8 +18,8 @@ class Transaksi_model extends CI_Model
         return $query;
     }
 
-    public function create($data) {
-    	$this->db->insert('transaksi', $data);
+    public function create($data)
+    {
+        $this->db->insert('transaksi', $data);
     }
-
 }

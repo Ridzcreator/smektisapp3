@@ -186,13 +186,13 @@ a:hover {
 	background-position: right;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1920) {
 	.container {
 		grid-gap: 5rem;
 	}
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1920) {
 	form {
 		width: 290px;
 	}
@@ -207,7 +207,7 @@ a:hover {
 	}
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1920) {
 	.container {
 		grid-template-columns: 1fr;
 	}

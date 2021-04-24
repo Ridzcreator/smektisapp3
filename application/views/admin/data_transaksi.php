@@ -51,15 +51,15 @@
                                             <td><?= $no++; ?></td>
                                             <td><?= $data->penyewa_nama; ?></td>
                                             <td>
-                                                <?php 
-                                                $transaksi_barang[$no-1] = [];
+                                                <?php
+                                                $transaksi_barang[$no - 1] = [];
                                                 foreach ($barang_pinjam as $b) {
                                                     if ($b->t_id == $data->t_id) {
-                                                        array_push($transaksi_barang[$no-1], $b->nama);
+                                                        array_push($transaksi_barang[$no - 1], $b->nama);
                                                     }
                                                 }
-                                                echo implode(', ', $transaksi_barang[$no-1]);
-                                                 ?>
+                                                echo implode(', ', $transaksi_barang[$no - 1]);
+                                                ?>
                                             </td>
                                             <td><?= date("d/m/Y H:i:s", strtotime($data->tanggal_pinjam)); ?></td>
                                             <td><?= date("d/m/Y H:i:s", strtotime('+' . ($data->durasi * 24) . ' hours', strtotime($data->tanggal_pinjam))); ?></td>
@@ -109,13 +109,13 @@
                                 <div class="input-group mb-3">
                                     <select class="custom-select" name="kategori_id" id="inputGroupSelect01" onchange="pilihKategori(this)">
                                         <option selected disabled value="">Pilih Kategori Barang</option>
-                                        <?php 
+                                        <?php
                                         foreach ($master_kategori as $kategori) {
                                         ?>
-                                        <option value="<?= $kategori->id; ?>"><?= $kategori->nama; ?></option>
+                                            <option value="<?= $kategori->id; ?>"><?= $kategori->nama; ?></option>
                                         <?php
                                         }
-                                         ?>
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -126,6 +126,7 @@
                                         <option selected disabled value=''>Pilih Barang Sewa</option>
                                     </select>
                                 </div>
+                                <button type="button" class="btn btn-info">Tambah</button>
                             </div>
                             <div class="form-group">
                                 <label for="tanggal_pinjam">Tanggal Pinjam</label>
@@ -142,13 +143,13 @@
                                 <div class="input-group mb-3">
                                     <select class="custom-select" name="status_id" id="inputGroupSelect01">
                                         <option selected disabled value="">Pilih Status Transaksi</option>
-                                        <?php 
+                                        <?php
                                         foreach ($master_status as $status) {
                                         ?>
-                                        <option value="<?= $status->id; ?>"><?= $status->nama; ?></option>
+                                            <option value="<?= $status->id; ?>"><?= $status->nama; ?></option>
                                         <?php
                                         }
-                                         ?>
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -177,13 +178,13 @@
     }
 
     function cetakPilihanBarang(kategori) {
-        <?php 
+        <?php
         echo "var barang = " . json_encode($master_barang) . ";";
-         ?>
+        ?>
 
         var pilihan = "<select class='custom-select' id='inputGroupSelect01'><option selected disabled value=''>Pilih Barang Sewa</option>";
 
-        barang.forEach( function(element) {
+        barang.forEach(function(element) {
             if (element.kategori_id == kategori) {
                 pilihan += "<option value='" + element.id + "'>" + element.nama + "</option>";
             }
