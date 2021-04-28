@@ -39,7 +39,6 @@
                                         <th>Stok</th>
                                         <th>Kategori</th>
                                         <th>Keterangan</th>
-                                        <th>status</th>
                                         <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -53,10 +52,15 @@
                                             <td><?= $no++; ?></td>
                                             <td><?= $b->nama_barang; ?></td>
                                             <td><?= $b->harga; ?></td>
-                                            <td><?= $b->stok; ?></td>
+                                            <td>
+                                                <a href="#"
+                                                style="<?php echo (isset($b->status) && $b->status < 1) ? 'color: red;' : 'color: black;'; ?>"
+                                                title="<?php echo 'Tersedia ' . (isset($b->status) ? $b->status : $b->stok); ?>">
+                                                    <?= $b->stok; ?>
+                                                </a>
+                                            </td>
                                             <td><?= $b->kategori_nama; ?></td>
                                             <td><?= $b->keterangan; ?></td>
-                                            <td></td>
                                             <td></td>
                                             <td class="d-flex justify-content-between">
                                                 <a class="text-link text-success" href="#" title="Edit" data-toggle="modal" data-target="#editModal">

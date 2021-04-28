@@ -17,7 +17,7 @@ class Penyewa extends CI_Controller
         $this->auth->isLoggedIn();
 
         $side['title'] = "Data Penyewa";
-        $data['penyewa'] = $this->penyewa_model->getMaster();
+        $data['penyewa'] = $this->penyewa_model->get();
 
         $this->load->view('_include/sidebar', $side);
         $this->load->view('admin/data_penyewa', $data);

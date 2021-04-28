@@ -69,11 +69,14 @@
                                                 <a class="text-link text-primary" href="#" title="Detail">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
-                                                <a class="text-link text-success" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $data->t_id; ?>">
+                                                <a class="text-link text-warning" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $data->t_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $data->t_id; ?>">
                                                     <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a class="text-link text-success" href="#" title="Selesaikan transaksi" data-toggle="modal" data-target="#selesaiModal<?= $data->t_id; ?>">
+                                                    <i class="fa fa-check-square"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -145,11 +148,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <h3>Apakah anda yakin ingin menghapus transaksi ini?</h3>
-                                                        <form action="<?php echo base_url('admin/transaksi/destroy'); ?>" method="post">
-                                                            <div class="form-group" hidden>
-                                                                <label for="id">ID Transaksi</label>
-                                                                <input type="number" class="form-control" name="id" value="<?= $data->t_id; ?>">
-                                                            </div>
+                                                        <form action="<?php echo base_url('admin/transaksi/destroy/' . $data->t_id); ?>" method="post">
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -160,6 +159,27 @@
                                             </div>
                                         </div>
                                         <!-- End Delete Modal -->
+
+                                        <!-- Selesai Modal -->
+                                        <div class="modal fade" id="selesaiModal<?= $data->t_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selesaikan <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h3>Apakah anda yakin ingin menyelesaikan transaksi ini?</h3>
+                                                        <form action="<?php echo base_url('admin/transaksi/selesai/' . $data->t_id); ?>" method="post">
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-success">Selesai</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Selesai Modal -->
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -277,10 +297,12 @@
         ?>
 
         var pilihan = '';
+        var counter = 0;
 
         this.barang.forEach(function(element) {
-            if (this.kategori.includes(element.kategori_id)) {
-                for (let i = 0; i < element.stok; i++) {
+            if (this.kategori.includes(element.kategori_id) && ((element.status && element.status > 0) || ! element.status)) {
+                counter = element.status ? element.status : element.stok;
+                for (let i = 0; i < counter; i++) {
                     pilihan += "<option value='" + element.id + "'>" + element.nama + "</option>";
                 }
             }

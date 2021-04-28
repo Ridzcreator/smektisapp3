@@ -22,7 +22,7 @@ class Barang extends CI_Controller
 
         $side['title'] = "Data Barang";
 
-        $data['barang'] = $this->barang_model->getMaster();
+        $data['barang'] = $this->barang_model->get();
 
         $this->load->view('_include/sidebar', $side);
         $this->load->view('admin/data_barang', $data);
