@@ -24,7 +24,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal"><i class="fa fa-plus-circle"></i> Tambah</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal"><i class="fa fa-plus-circle"></i> Tambah Barang</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModa2"><i class="fa fa-plus-circle"></i> Tambah Kategori Barang</button>
                             <!-- <h3 class="card-title" style="width: 100%;"><marquee behavior="" direction="left">Ini info terbaru</marquee></h3> -->
                         </div>
                         <!-- /.card-header -->
@@ -34,15 +35,42 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Nama</th>
-                                        <th>Barang Dipinjam</th>
-                                        <th>Tanggal Sewa/Pinjam</th>
-                                        <th>Tanggal Kembali</th>
-                                        <th>Status</th>
-                                        <th>Alamat</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                        <th>Kategori</th>
+                                        <th>Keterangan</th>
+                                        <th>status</th>
+                                        <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($barang as $b) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $b->nama_barang; ?></td>
+                                            <td><?= $b->harga; ?></td>
+                                            <td><?= $b->stok; ?></td>
+                                            <td><?= $b->kategori_nama; ?></td>
+                                            <td><?= $b->keterangan; ?></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="d-flex justify-content-between">
+                                                <a class="text-link text-success" href="#" title="Edit" data-toggle="modal" data-target="#editModal">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
 
+                                        </tr>
+
+                                    <?php } ?>
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -63,27 +91,21 @@
                         <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title; ?></h5>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="post">
+                        <form action="<?php echo base_url('admin/barang/barang'); ?>" method="post">
                             <div class="form-group">
-                                <label for="penyewa">Nama Barang</label>
-                                <input type="nama" class="form-control" id="nama" placeholder="Masukkan Nama Barang">
+                                <label for="nama_barang">Nama Barang</label>
+                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="penyewa">Harga Barang</label>
                                 <input type="nama" class="form-control" id="nama" placeholder="Masukkan Harga Sewa Barang">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="penyewa">Stok Barang</label>
                                 <input type="nama" class="form-control" id="nama" placeholder="Masukkan Jumblah Barang">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
-                                <label for="penyewa">Kategori Barang</label>
+                                <label for="kategori_barang">Kategori Barang</label>
                                 <div class="input-group mb-3">
                                     <select class="custom-select" id="inputGroupSelect01">
                                         <option selected>Pilih Kategori Barang</option>
@@ -93,8 +115,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Tambah Foto Barang</label>
                                 <div class="input-group mb-3">
@@ -107,9 +127,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-
-                        <form action="" method="post">
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Keterangan Barang</label>

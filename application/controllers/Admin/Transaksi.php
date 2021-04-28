@@ -63,7 +63,7 @@ class Transaksi extends CI_Controller
                 'barang_id' => $key,
                 'jumlah' => $value,
             );
-            
+
             $this->barang_pinjam_model->create($dataBarang);
         }
 
@@ -94,7 +94,7 @@ class Transaksi extends CI_Controller
                     'barang_id' => $key,
                     'jumlah' => $value,
                 );
-                
+
                 $this->barang_pinjam_model->create($dataBarang);
             }
         }
@@ -102,7 +102,8 @@ class Transaksi extends CI_Controller
         redirect('admin/transaksi/index');
     }
 
-    public function destroy() {
+    public function destroy()
+    {
         $id = $this->input->post('id');
 
         $this->transaksi_model->delete($id);
