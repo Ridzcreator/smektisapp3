@@ -86,7 +86,7 @@
                                                         <h5 class="modal-title" id="exampleModalLabel">Edit <?= $title; ?></h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="<?php echo base_url('admin/transaksi/update/'.$data->t_id); ?>" method="post">
+                                                        <form action="<?php echo base_url('admin/transaksi/update/' . $data->t_id); ?>" method="post">
                                                             <div class="form-group">
                                                                 <label for="penyewa_id">Penyewa</label>
                                                                 <div class="input-group mb-3">
@@ -280,7 +280,7 @@
 
         this.barang.forEach(function(element) {
             if (this.kategori.includes(element.kategori_id)) {
-                for(let i = 0; i < element.stok; i++){
+                for (let i = 0; i < element.stok; i++) {
                     pilihan += "<option value='" + element.id + "'>" + element.nama + "</option>";
                 }
             }
