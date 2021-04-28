@@ -30,7 +30,7 @@ class Transaksi extends CI_Controller
         $data['master_penyewa'] = $this->penyewa_model->getMaster();
         $data['transaksi'] = $this->transaksi_model->getDataTransaksi();
         $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id']);
-        $data['master_kategori'] = $this->kategori_model->getMaster();
+        $data['master_kategori'] = $this->kategori_model->getMasterOnBarang();
         $data['master_barang'] = $this->barang_model->getMaster();
         $data['master_status'] = $this->status_model->getMaster();
 
@@ -63,7 +63,7 @@ class Transaksi extends CI_Controller
                 'barang_id' => $key,
                 'jumlah' => $value,
             );
-            
+
             $this->barang_pinjam_model->create($dataBarang);
         }
 
@@ -94,7 +94,7 @@ class Transaksi extends CI_Controller
                     'barang_id' => $key,
                     'jumlah' => $value,
                 );
-                
+
                 $this->barang_pinjam_model->create($dataBarang);
             }
         }
@@ -102,10 +102,22 @@ class Transaksi extends CI_Controller
         redirect('admin/transaksi/index');
     }
 
-    public function destroy() {
-        $id = $this->input->post('id');
-
+    public function destroy($id)
+    {
         $this->transaksi_model->delete($id);
+
+        redirect('admin/transaksi/index');
+    }
+
+    public function selesai($id)
+    {
+        $date = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+
+        $dataTransaksi = array(
+            'tanggal_kembali' => $date->format('Y-m-d H:i:s'),
+        );
+
+        $this->transaksi_model->update($id, $dataTransaksi);
 
         redirect('admin/transaksi/index');
     }

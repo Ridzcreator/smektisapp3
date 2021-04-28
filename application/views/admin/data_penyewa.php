@@ -37,28 +37,36 @@
                                         <th>Alamat</th>
                                         <th>No. Telp</th>
                                         <th>Jaminan</th>
+                                        <th>Foto Jaminan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="d-flex justify-content-between">
-                                            <a class="text-link text-primary" href="#" title="Detail">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                            <a class="text-link text-success" href="#" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a class="text-link text-danger" href="#" title="Hapus">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($penyewa as $p) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $p->nama_penyewa; ?></td>
+                                            <td><?= $p->alamat; ?></td>
+                                            <td><?= $p->no_telp; ?></td>
+                                            <td><?= $p->jaminan; ?></td>
+                                            <td></td>
+                                            <td class="d-flex justify-content-between">
+                                                <a class="text-link text-primary" href="#" title="Detail">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                                <a class="text-link text-success" href="#" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a class="text-link text-danger" href="#" title="Hapus">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
                                 </tbody>
 
                             </table>
@@ -81,37 +89,27 @@
                         <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title; ?></h5>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="post">
+                        <form action="<?php echo base_url('admin/penyewa/data_penyewa'); ?>" method="post">
                             <div class="form-group">
                                 <label for="nama">Nama Penyewa</label>
-                                <input type="nama" class="form-control" id="nama" placeholder="Masukkan Nama Penyewa">
+                                <input type="nama" class="form-control" name="nama_penyewa" placeholder="Masukkan Nama Penyewa">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="alamat">Alamat Penyewa</label>
                                 <input type="nama" class="form-control" id="nama" placeholder="Masukkan Alamat Penyewa">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="email">Email Penyewa</label>
                                 <input type="nama" class="form-control" id="nama" placeholder="Masukkan Email Penyewa">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="notelp">Nomor Telpon Penyewa</label>
                                 <input type="nama" class="form-control" id="nama" placeholder="Masukkan Nomor Telpon Penyewa">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="notelp">Sosial Media</label>
                                 <input type="nama" class="form-control" id="nama" placeholder="Masukkan Social Media Penyewa">
                             </div>
-                        </form>
-                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="jenis_kelamin">Jenis Kelamin Penyewa</label>
                                 <div class="input-group mb-3">
@@ -122,11 +120,11 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>
