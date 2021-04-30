@@ -17,7 +17,7 @@ class Penyewa_model extends CI_Model
 	        penyewa.nama as nama_penyewa,
 	        transaksi.id as t_id
    		');
-   		
+
         $this->db->from('penyewa');
         $this->db->join('transaksi', 'transaksi.penyewa_id = penyewa.id');
         $query = $this->db->get();

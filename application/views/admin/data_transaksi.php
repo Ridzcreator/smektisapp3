@@ -66,10 +66,10 @@
                                             <td><?= $data->status_nama; ?></td>
                                             <td><?= $data->alamat; ?></td>
                                             <td class="d-flex justify-content-between">
-                                                <a class="text-link text-primary" href="#" title="Detail">
-                                                    <i class="fas fa-info-circle"></i>
+                                                <a class="text-link text-dark" href="#" title="Print">
+                                                    <i class="fa fa-print"></i>
                                                 </a>
-                                                <a class="text-link text-warning" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $data->t_id; ?>">
+                                                <a class="text-link text-primary" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $data->t_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $data->t_id; ?>">
@@ -300,7 +300,7 @@
         var counter = 0;
 
         this.barang.forEach(function(element) {
-            if (this.kategori.includes(element.kategori_id) && ((element.status && element.status > 0) || ! element.status)) {
+            if (this.kategori.includes(element.kategori_id) && ((element.status && element.status > 0) || !element.status)) {
                 counter = element.status ? element.status : element.stok;
                 for (let i = 0; i < counter; i++) {
                     pilihan += "<option value='" + element.id + "'>" + element.nama + "</option>";

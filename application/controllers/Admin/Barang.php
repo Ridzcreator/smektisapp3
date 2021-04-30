@@ -29,21 +29,30 @@ class Barang extends CI_Controller
         $this->load->view('_include/footer');
     }
 
-    public function barang()
+    public function tambahbarang()
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
 
-        $dataBarang = array(
+        $get = array(
             'user_id' => $_SESSION['user_id'],
-
-            'nama_barang' => $this->input->post('nama_barang'),
-
+            'kategori_id' => $this->input->post('kategori_id'),
+            'nama' => $this->input->post('nama_barang'),
+            'harga' => $this->input->post('harga_barang'),
+            'stok' => $this->input->post('stok_barang'),
+            'keterangan' => $this->input->post('keterangan_barang'),
         );
 
-        $this->barang_model->create($dataBarang);
+        $this->barang_model->create($get);
 
-        redirect('admin/transaksi/index');
+        redirect('admin/barang/index');
+    }
+
+    public function destroy($id)
+    {
+        $this->barang_model->delete($id);
+
+        redirect('admin/barang/index');
     }
 }

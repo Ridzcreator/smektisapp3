@@ -37,7 +37,6 @@
                                         <th>Alamat</th>
                                         <th>No. Telp</th>
                                         <th>Jaminan</th>
-                                        <th>Foto Jaminan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -52,7 +51,6 @@
                                             <td><?= $p->alamat; ?></td>
                                             <td><?= $p->no_telp; ?></td>
                                             <td><?= $p->jaminan; ?></td>
-                                            <td></td>
                                             <td class="d-flex justify-content-between">
                                                 <a class="text-link text-primary" href="#" title="Detail">
                                                     <i class="fas fa-info-circle"></i>
