@@ -64,12 +64,32 @@
                                                 <a class="text-link text-success" href="#" title="Edit" data-toggle="modal" data-target="#editModal">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal">
+                                                <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $b->b_id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
-
                                         </tr>
+
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="hapusModal<?= $b->b_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Hapus <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h3>Apakah anda yakin ingin menghapus barang ini?</h3>
+                                                        <form action="<?php echo base_url('admin/barang/destroy/' . $b->b_id); ?>" method="post">
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Delete Modal -->
 
                                     <?php } ?>
                                 </tbody>
@@ -107,10 +127,17 @@
                                 <input type="nama" class="form-control" name="stok_barang" placeholder="Masukkan Jumblah Barang">
                             </div>
                             <div class="form-group">
-                                <label for="kategori_barang">Kategori Barang</label>
+                                <label for="kategori_id">Kategori Barang</label>
                                 <div class="input-group mb-3">
                                     <select class="custom-select" name="kategori_id" id="inputGroupSelect01">
-                                        <option selected>2</option>
+                                        <option selected disabled value="">Pilih Kategori Barang</option>
+                                        <?php
+                                        foreach ($master_kategori as $kategori) {
+                                        ?>
+                                            <option value="<?= $kategori->id; ?>"><?= $kategori->nama; ?></option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -147,13 +174,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title; ?></h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kategori</h5>
                     </div>
                     <div class="modal-body">
                         <form action="<?php echo base_url('admin/barang/tambahkategoribarang'); ?>" method="post">
                             <div class="form-group">
-                                <label for="nama_barang">Nama Barang</label>
-                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)">
+                                <label for="ketegori_nama">Nama Kategori</label>
+                                <input type="text" class="form-control" name="kategori_nama" placeholder="Masukkan Nama Kategori">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

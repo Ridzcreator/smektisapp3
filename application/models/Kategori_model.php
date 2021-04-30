@@ -24,4 +24,11 @@ class Kategori_model extends CI_Model
 
         return $query->result();
     }
+    public function create($data)
+    {
+        $this->db->insert('kategori', $data);
+        $insert_id = $this->db->insert_id();
+
+        return $insert_id;
+    }
 }

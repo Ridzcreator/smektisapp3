@@ -4,6 +4,7 @@ class Barang extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('kategori_model');
         $this->load->model('barang_model');
 
 
@@ -23,6 +24,7 @@ class Barang extends CI_Controller
         $side['title'] = "Data Barang";
 
         $data['barang'] = $this->barang_model->get();
+        $data['master_kategori'] = $this->kategori_model->getMaster();
 
         $this->load->view('_include/sidebar', $side);
         $this->load->view('admin/data_barang', $data);
@@ -45,6 +47,21 @@ class Barang extends CI_Controller
         );
 
         $this->barang_model->create($get);
+
+        redirect('admin/barang/index');
+    }
+
+    public function tambahkategoribarang()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $get = array(
+            'nama' => $this->input->post('kategori_nama'),
+        );
+
+        $this->kategori_model->create($get);
 
         redirect('admin/barang/index');
     }
