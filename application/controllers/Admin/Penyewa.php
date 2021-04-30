@@ -17,13 +17,30 @@ class Penyewa extends CI_Controller
         $this->auth->isLoggedIn();
 
         $side['title'] = "Data Penyewa";
-        $data['penyewa'] = $this->penyewa_model->get();
+        $data['penyewa'] = $this->penyewa_model->getMaster();
 
         $this->load->view('_include/sidebar', $side);
         $this->load->view('admin/data_penyewa', $data);
         $this->load->view('_include/footer');
     }
-    public function data_penyewa()
+
+    public function edit($id)
+    {
+        $inputpenyewa = array(
+            'nama' => $this->input->post('nama'),
+            'alamat' => $this->input->post('alamat'),
+            'email' => $this->input->post('email'),
+            'no_telp' => $this->input->post('no_telp'),
+            'media_sosial' => $this->input->post('media_sosial'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+        );
+
+        $this->penyewa_model->update($id, $inputpenyewa);
+
+        redirect('admin/penyewa/index');
+    }
+
+    public function save()
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -31,12 +48,23 @@ class Penyewa extends CI_Controller
 
         $inputpenyewa = array(
             'user_id' => $_SESSION['user_id'],
-            'nama_penyewa' => $this->input->post('nama_penyewa'),
-            'transaksi_id' => $this->input->post('nama_penyewa')
+            'nama' => $this->input->post('nama'),
+            'alamat' => $this->input->post('alamat'),
+            'email' => $this->input->post('email'),
+            'no_telp' => $this->input->post('no_telp'),
+            'media_sosial' => $this->input->post('media_sosial'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
         );
 
         $this->penyewa_model->create($inputpenyewa);
 
-        redirect('admin/transaksi/index');
+        redirect('admin/penyewa/index');
+    }
+
+    public function destroy($id)
+    {
+        $this->penyewa_model->delete($id);
+
+        redirect('admin/penyewa/index');
     }
 }

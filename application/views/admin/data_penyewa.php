@@ -1,4 +1,3 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -33,10 +32,12 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Nama Penyewa</th>
+                                        <th>Nama</th>
+                                        <th>E-mail</th>
                                         <th>Alamat</th>
                                         <th>No. Telp</th>
-                                        <th>Jaminan</th>
+                                        <th>Media Sosial</th>
+                                        <th>Jenis Kelamin</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -47,23 +48,95 @@
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td><?= $p->nama_penyewa; ?></td>
+                                            <td><?= $p->nama; ?></td>
                                             <td><?= $p->alamat; ?></td>
+                                            <td><?= $p->email; ?></td>
                                             <td><?= $p->no_telp; ?></td>
-                                            <td><?= $p->jaminan; ?></td>
+                                            <td><?= $p->media_sosial; ?></td>
+                                            <td><?= $p->jenis_kelamin; ?></td>
                                             <td class="d-flex justify-content-between">
-                                                <a class="text-link text-primary" href="#" title="Detail">
+                                                <a class="text-link text-warning" href="#" title="Detail">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
-                                                <a class="text-link text-success" href="#" title="Edit">
+                                                <a class="text-link text-primary" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $p->id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a class="text-link text-danger" href="#" title="Hapus">
+                                                <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $p->id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
 
+                                        <!-- Edit Modal -->
+                                        <div class="modal fade" id="editModal<?= $p->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="<?php echo base_url('admin/penyewa/edit/' . $p->id); ?>" method="post">
+                                                            <div class="form-group">
+                                                                <label for="nama">Nama</label>
+                                                                <input type="nama" class="form-control" name="nama" placeholder="Masukkan Nama Penyewa" value="<?= $p->nama; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="alamat">Alamat</label>
+                                                                <input type="alamat" class="form-control" name="alamat" placeholder="Masukkan Alamat Penyewa" value="<?= $p->alamat; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="email">Email</label>
+                                                                <input type="email" class="form-control" name="email" placeholder="Masukkan Email Penyewa" value="<?= $p->email; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="no_telp">Nomor Telpon</label>
+                                                                <input type="no_telp" class="form-control" name="no_telp" placeholder="Masukkan Nomor Telpon Penyewa" value="<?= $p->no_telp; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="media_sosial">Media Sosial</label>
+                                                                <input type="media_sosial" class="form-control" name="media_sosial" placeholder="Masukkan Media Sosial Penyewa" value="<?= $p->media_sosial; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="jenis_kelamin">Jenis Kelamin</label>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="custom-select" name="jenis_kelamin">
+                                                                        <option disabled>Pilih Jenis Kelamin Penyewa</option>
+                                                                        <option value="Laki-laki" <?= $p->jenis_kelamin == "Laki-laki" ? "selected" : ""; ?>>Laki-laki</option>
+                                                                        <option value="Perempuan" <?= $p->jenis_kelamin == "Perempuan" ? "selected" : ""; ?>>Perempuan</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Edit Modal -->
+
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="hapusModal<?= $p->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Hapus <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h3>Apakah anda yakin ingin menghapus data penyewa ini?</h3>
+                                                        <form action="<?php echo base_url('admin/penyewa/destroy/' . $p->id); ?>" method="post">
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Delete Modal -->
                                     <?php } ?>
                                 </tbody>
 
@@ -79,7 +152,7 @@
         </div>
         <!-- /.container-fluid -->
 
-        <!-- Modal -->
+        <!-- Add Modal -->
         <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -87,34 +160,34 @@
                         <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title; ?></h5>
                     </div>
                     <div class="modal-body">
-                        <form action="<?php echo base_url('admin/penyewa/data_penyewa'); ?>" method="post">
+                        <form action="<?php echo base_url('admin/penyewa/save'); ?>" method="post">
                             <div class="form-group">
-                                <label for="nama">Nama Penyewa</label>
-                                <input type="nama" class="form-control" name="nama_penyewa" placeholder="Masukkan Nama Penyewa">
+                                <label for="nama">Nama</label>
+                                <input type="nama" class="form-control" name="nama" placeholder="Masukkan Nama Penyewa">
                             </div>
                             <div class="form-group">
-                                <label for="alamat">Alamat Penyewa</label>
-                                <input type="nama" class="form-control" id="nama" placeholder="Masukkan Alamat Penyewa">
+                                <label for="alamat">Alamat</label>
+                                <input type="alamat" class="form-control" name="alamat" placeholder="Masukkan Alamat Penyewa">
                             </div>
                             <div class="form-group">
-                                <label for="email">Email Penyewa</label>
-                                <input type="nama" class="form-control" id="nama" placeholder="Masukkan Email Penyewa">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="Masukkan Email Penyewa">
                             </div>
                             <div class="form-group">
-                                <label for="notelp">Nomor Telpon Penyewa</label>
-                                <input type="nama" class="form-control" id="nama" placeholder="Masukkan Nomor Telpon Penyewa">
+                                <label for="no_telp">Nomor Telpon</label>
+                                <input type="no_telp" class="form-control" name="no_telp" placeholder="Masukkan Nomor Telpon Penyewa">
                             </div>
                             <div class="form-group">
-                                <label for="notelp">Sosial Media</label>
-                                <input type="nama" class="form-control" id="nama" placeholder="Masukkan Social Media Penyewa">
+                                <label for="media_sosial">Media Sosial</label>
+                                <input type="media_sosial" class="form-control" name="media_sosial" placeholder="Masukkan Media Sosial Penyewa">
                             </div>
                             <div class="form-group">
-                                <label for="jenis_kelamin">Jenis Kelamin Penyewa</label>
+                                <label for="jenis_kelamin">Jenis Kelamin</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>Pilih Jenis Kelamin Penyewa</option>
-                                        <option value="1">Laki - Laki</option>
-                                        <option value="2">Perempuan</option>
+                                    <select class="custom-select" name="jenis_kelamin">
+                                        <option selected disabled>Pilih Jenis Kelamin Penyewa</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>
                             </div>
@@ -127,7 +200,9 @@
                 </div>
             </div>
         </div>
+        <!-- End Add Modal -->
+
     </section>
     <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+<!-- /.content-wrapper

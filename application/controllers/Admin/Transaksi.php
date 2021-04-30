@@ -70,12 +70,8 @@ class Transaksi extends CI_Controller
         redirect('admin/transaksi/index');
     }
 
-    public function update($transaksi_id)
+    public function edit($transaksi_id)
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $dataTransaksi = array(
             'penyewa_id' => $this->input->post('penyewa_id' . $transaksi_id),
             'status_id' => $this->input->post('status_id' . $transaksi_id),

@@ -8,12 +8,11 @@ class Barang_model extends CI_Model
         	barang.kategori_id as kategori_id,
         	barang.nama as nama,
         	barang.stok as stok,
-        	(barang.stok - sum(barang_pinjam.jumlah)) as status
+        	(barang.stok - sum(case when transaksi.tanggal_kembali is null then barang_pinjam.jumlah else 0 end)) as status
     	');
         $this->db->from('barang');
         $this->db->join('barang_pinjam', 'barang.id = barang_pinjam.barang_id', 'left');
         $this->db->join('transaksi', 'transaksi.id = barang_pinjam.transaksi_id', 'left');
-        $this->db->where('transaksi.tanggal_kembali', null, false);
         $this->db->group_by('barang.id');
         $query = $this->db->get();
 
@@ -30,14 +29,14 @@ class Barang_model extends CI_Model
 	        barang.keterangan as keterangan,
 	        kategori.id as k_id,
 	        kategori.nama as kategori_nama,
-	        (barang.stok - sum(barang_pinjam.jumlah)) as status
+	        (barang.stok - sum(case when transaksi.tanggal_kembali is null then barang_pinjam.jumlah else 0 end)) as status
         ');
 
         $this->db->from('barang');
         $this->db->join('kategori', 'kategori_id = kategori.id');
         $this->db->join('barang_pinjam', 'barang.id = barang_pinjam.barang_id', 'left');
         $this->db->join('transaksi', 'transaksi.id = barang_pinjam.transaksi_id', 'left');
-        $this->db->where('transaksi.tanggal_kembali', null, false);
+        // $this->db->where('transaksi.tanggal_kembali', null, false);
         $this->db->group_by('barang.id');
         $query = $this->db->get();
 

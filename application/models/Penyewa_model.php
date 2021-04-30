@@ -12,14 +12,14 @@ class Penyewa_model extends CI_Model
 
     public function get()
     {
-        $this->db->select('*, 
+        $this->db->select('
+            *,
 	        penyewa.id as p_id,
-	        penyewa.nama as nama_penyewa,
 	        transaksi.id as t_id
    		');
 
         $this->db->from('penyewa');
-        $this->db->join('transaksi', 'transaksi.penyewa_id = penyewa.id');
+        $this->db->join('transaksi', 'penyewa.id = transaksi.penyewa_id');
         $query = $this->db->get();
 
         return $query->result();
@@ -31,5 +31,17 @@ class Penyewa_model extends CI_Model
         $insert_id = $this->db->insert_id();
 
         return $insert_id;
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('penyewa', $data);
+    }
+
+    public function delete($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('penyewa');
     }
 }
