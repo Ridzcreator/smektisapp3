@@ -33,8 +33,11 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Tanggal Transaksi</th>
+                                        <th>Bulan</th>
+                                        <th>Tanggal Sewa/Pinjam</th>
+                                        <th>Tanggal Kembali</th>
                                         <th>Nama Penyewa</th>
+                                        <th>Status</th>
                                         <th>Total</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -45,15 +48,15 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td class="d-flex justify-content-between">
                                             <a class="text-link text-primary" href="#" title="Detail">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
-                                            <a class="text-link text-success" href="#" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a class="text-link text-danger" href="#" title="Hapus">
-                                                <i class="fas fa-trash"></i>
+                                            <a class="text-link text-dark" href="#" title="Print">
+                                                <i class="fa fa-print"></i>
                                             </a>
                                         </td>
                                     </tr>

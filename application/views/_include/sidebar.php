@@ -19,6 +19,7 @@ if (session_status() == PHP_SESSION_NONE) {
   <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/plugins/daterangepicker/daterangepicker.css'); ?>">
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/dist/css/adminlte.min.css'); ?>">

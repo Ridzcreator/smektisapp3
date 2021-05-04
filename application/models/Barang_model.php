@@ -51,6 +51,12 @@ class Barang_model extends CI_Model
         return $insert_id;
     }
 
+    public function update($b_id, $data)
+    {
+        $this->db->where('id', $b_id);
+        $this->db->update('barang', $data);
+    }
+
     public function delete($id)
     {
         $this->db->where('id', $id);

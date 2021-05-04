@@ -30,6 +30,7 @@
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js') ?>"></script>
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/daterangepicker/daterangepicker.js') ?>"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url('vendor/AdminLTE/dist/js/adminlte.min.js') ?>"></script>
     <!-- AdminLTE for demo purposes -->
@@ -41,12 +42,12 @@
       $(function() {
         //Initialize Select2 Elements
         $('.select2').select2();
-
+        // "copy", "csv", "excel", "pdf", "print", 
         $("#example1").DataTable({
           "responsive": true,
           "lengthChange": false,
           "autoWidth": false,
-          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+          "buttons": ["colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
         $("#barang_table").DataTable({

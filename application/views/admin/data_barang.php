@@ -61,7 +61,7 @@
                                             <td><?= $b->keterangan; ?></td>
                                             <td></td>
                                             <td class="d-flex justify-content-between">
-                                                <a class="text-link text-success" href="#" title="Edit" data-toggle="modal" data-target="#editModal">
+                                                <a class="text-link text-primary" href="#" title="Ubah" data-toggle="modal" data-target="#editModal<?= $b->b_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $b->b_id; ?>">
@@ -69,6 +69,71 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                        <!-- edit modal  -->
+                                        <div class="modal fade" id="editModal<?= $b->b_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Ubah <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="<?php echo base_url('admin/barang/editbarang' . $b->b_id); ?>" method="post">
+                                                            <div class="form-group">
+                                                                <label for="nama_barang">Nama Barang</label>
+                                                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)" value="<?= $b->nama_barang; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="penyewa">Harga Barang</label>
+                                                                <input type="nama" class="form-control" name="harga_barang" placeholder="Masukkan Harga Sewa Barang" value="<?= $b->harga; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="penyewa">Stok Barang</label>
+                                                                <input type="nama" class="form-control" name="stok_barang" placeholder="Masukkan Jumblah Barang" value="<?= $b->stok; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="kategori_id">Kategori Barang</label>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="custom-select" name="kategori_id" id="inputGroupSelect01">
+                                                                        <option selected disabled value="<?= $b_id->kategori_nama; ?>">Pilih Kategori Barang</option>
+                                                                        <?php
+                                                                        foreach ($master_kategori as $kategori) {
+                                                                        ?>
+                                                                            <option value="<?= $kategori->id; ?>"><?= $kategori->nama; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleFormControlTextarea1">Tambah Foto Barang</label>
+                                                                <div class="input-group mb-3">
+                                                                    <div class="custom-file">
+                                                                        <input type="file" name="image" class="custom-file-input">
+                                                                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Pilih Foto</label>
+                                                                    </div>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-group">
+                                                                    <label for="exampleFormControlTextarea1">Keterangan Barang</label>
+                                                                    <textarea class="form-control" name="keterangan_barang" id="exampleFormControlTextarea1" rows="3" value=""><?= $b_id->keterangan; ?></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end edit modal -->
 
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="hapusModal<?= $b->b_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -194,26 +259,6 @@
         </div>
         <!-- end modal kategori -->
 
-        <!-- Delete Modal -->
-        <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus <?= $title; ?></h5>
-                    </div>
-                    <div class="modal-body">
-                        <h3>Apakah anda yakin ingin menghapus transaksi ini?</h3>
-                        <form action="<?php echo base_url('admin/barang/destroy/'); ?>" method="post">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Delete Modal -->
     </section>
     <!-- /.content -->
 </div>

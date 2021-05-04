@@ -55,10 +55,10 @@
                                             <td><?= $p->media_sosial; ?></td>
                                             <td><?= $p->jenis_kelamin; ?></td>
                                             <td class="d-flex justify-content-between">
-                                                <a class="text-link text-warning" href="#" title="Detail">
+                                                <a class="text-link text-warning" href="#" title="Detail" data-toggle="modal" data-target="#detailModal<?= $p->id; ?>">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
-                                                <a class="text-link text-primary" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $p->id; ?>">
+                                                <a class="text-link text-primary" href="#" title="Hapus" data-toggle="modal" data-target="#editModal<?= $p->id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $p->id; ?>">
@@ -116,6 +116,44 @@
                                             </div>
                                         </div>
                                         <!-- End Edit Modal -->
+                                        <!-- Detail Modal -->
+                                        <div class="modal fade" id="detailModal<?= $p->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Detail <?= $title; ?></h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="<?php echo base_url('admin/penyewa/destroy/' . $p->id); ?>" method="post">
+                                                            <div>
+                                                                <h6>Nama : <?= $p->nama; ?></h6>
+                                                            </div>
+                                                            <div>
+                                                                <h6>Alamat : <?= $p->alamat; ?></h6>
+                                                            </div>
+                                                            <div>
+                                                                <h6>Email : <?= $p->email; ?></h6>
+                                                            </div>
+                                                            <div>
+                                                                <h6>Nomor Telpon : <?= $p->no_telp; ?></h6>
+                                                            </div>
+                                                            <div>
+                                                                <h6>Media Social : <?= $p->media_sosial; ?></h6>
+                                                            </div>
+                                                            <div>
+                                                                <h6>Jenis Kelamin : <?= $p->jenis_kelamin; ?></h6>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Lihat Lokasi Penyewa</button>
+                                                                <button type="submit" class="btn btn-success">Hubungi Penyewa</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Detail Modal -->
 
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="hapusModal<?= $p->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
