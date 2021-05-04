@@ -4,6 +4,7 @@ class Barang extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->library('upload');
         $this->load->model('kategori_model');
         $this->load->model('barang_model');
 
@@ -62,7 +63,31 @@ class Barang extends CI_Controller
             'keterangan' => $this->input->post('keterangan_barang'),
         );
 
-        $this->barang_model->create($get);
+        $barang_id = $this->barang_model->create($get);
+
+        $config['upload_path'] = APPPATH. '../assets/img/product/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = 204800;
+        $config['file_name'] = $barang_id . '_image'; // 1_image
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('image')){
+            $error = array('error' => $this->upload->display_errors());
+        }
+        else{
+            //file is uploaded successfully
+            //now get the file uploaded data 
+            $upload_data = $this->upload->data('file_name');
+
+        }
+            $ext = explode('.', $_FILES['image']['name']);
+
+            $edit = array(
+                'foto' => $barang_id . '_image' . $upload_data['file_type']
+            );
+
+            $this->barang_model->update($barang_id, $edit);
 
         redirect('admin/barang/index');
     }

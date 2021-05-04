@@ -178,7 +178,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Tambah <?= $title; ?></h5>
                     </div>
                     <div class="modal-body">
-                        <form action="<?php echo base_url('admin/barang/tambahbarang'); ?>" method="post">
+                        <form action="<?php echo base_url('admin/barang/tambahbarang'); ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nama_barang">Nama Barang</label>
                                 <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)">
@@ -210,11 +210,8 @@
                                 <label for="exampleFormControlTextarea1">Tambah Foto Barang</label>
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
-                                        <input type="file" name="image" class="custom-file-input">
+                                        <input type="file" name="image" id="image" class="custom-file-input">
                                         <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Pilih Foto</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
                                     </div>
                                 </div>
                             </div>
