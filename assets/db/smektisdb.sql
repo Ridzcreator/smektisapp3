@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 04:11 PM
--- Server version: 5.7.28
--- PHP Version: 7.4.12
+-- Generation Time: May 04, 2021 at 02:52 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,16 +34,19 @@ CREATE TABLE `barang` (
   `nama` varchar(100) NOT NULL,
   `harga` bigint(20) NOT NULL,
   `stok` int(11) NOT NULL,
-  `keterangan` varchar(255) DEFAULT NULL
+  `keterangan` varchar(255) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `user_id`, `kategori_id`, `nama`, `harga`, `stok`, `keterangan`) VALUES
-(1, 1, 1, 'Canon EOS 60D', 125000, 1, 'Boleh dipinjam kapan saja'),
-(2, 1, 1, 'Sony A7ii', 250000, 1, 'Boleh dipinjam kapan saja');
+INSERT INTO `barang` (`id`, `user_id`, `kategori_id`, `nama`, `harga`, `stok`, `keterangan`, `foto`) VALUES
+(1, 1, 1, 'Canon EOS 60D', 125000, 1, 'Boleh dipinjam kapan saja', '0'),
+(2, 1, 1, 'Sony A7ii', 250000, 5, 'Boleh dipinjam kapan saja', '0'),
+(11, 1, 2, 'Godox', 80000, 4, 'Lampu Flash', NULL),
+(12, 1, 2, 'LED 500 Watt', 150000, 3, 'lampu Terang benerang', NULL);
 
 -- --------------------------------------------------------
 
@@ -63,8 +66,8 @@ CREATE TABLE `barang_pinjam` (
 --
 
 INSERT INTO `barang_pinjam` (`id`, `transaksi_id`, `barang_id`, `jumlah`) VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 1);
+(18, 19, 1, 1),
+(19, 19, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -83,7 +86,8 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id`, `nama`) VALUES
 (1, 'Kamera'),
-(2, 'Lighting');
+(2, 'Lighting'),
+(3, 'Gimbal');
 
 -- --------------------------------------------------------
 
@@ -107,7 +111,7 @@ CREATE TABLE `penyewa` (
 --
 
 INSERT INTO `penyewa` (`id`, `user_id`, `nama`, `alamat`, `email`, `no_telp`, `media_sosial`, `jenis_kelamin`) VALUES
-(1, 1, 'Bambang', 'Jl. Konoha Gakure no.444', 'bambang@gmail.com', '089999666788', 'Bambang Clalu Setia', 'Laki-laki');
+(3, 1, 'Mohamad Nur Riduwan', 'Jl Tumapel', 'mohamadnurriduwan@gmail.com', '0895366446634', 'NRidz.me', 'Laki-laki');
 
 -- --------------------------------------------------------
 
@@ -142,17 +146,16 @@ CREATE TABLE `transaksi` (
   `tanggal_pinjam` datetime NOT NULL,
   `durasi` float NOT NULL,
   `jaminan` varchar(255) NOT NULL,
-  `tanggal_kembali` datetime DEFAULT NULL
+  `tanggal_kembali` datetime DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id`, `user_id`, `penyewa_id`, `status_id`, `tanggal_pinjam`, `durasi`, `jaminan`, `tanggal_kembali`) VALUES
-(1, 1, 1, 2, '2021-04-17 17:06:26', 0.5, 'KTP;BPJS', NULL),
-(2, 1, 1, 1, '2021-04-23 23:08:00', 1, 'BPJS', NULL),
-(3, 1, 1, 1, '2021-04-23 23:08:00', 1, 'BPJS', NULL);
+INSERT INTO `transaksi` (`id`, `user_id`, `penyewa_id`, `status_id`, `tanggal_pinjam`, `durasi`, `jaminan`, `tanggal_kembali`, `foto`) VALUES
+(19, 1, 3, 2, '2021-05-04 19:34:00', 2, 'KTP KK', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -238,25 +241,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `barang_pinjam`
 --
 ALTER TABLE `barang_pinjam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `penyewa`
 --
 ALTER TABLE `penyewa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -268,7 +271,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -293,12 +296,6 @@ ALTER TABLE `barang`
 ALTER TABLE `barang_pinjam`
   ADD CONSTRAINT `barang_pinjam_ibfk_1` FOREIGN KEY (`transaksi_id`) REFERENCES `transaksi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `barang_pinjam_ibfk_2` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `penyewa`
---
-ALTER TABLE `penyewa`
-  ADD CONSTRAINT `penyewa_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi`
