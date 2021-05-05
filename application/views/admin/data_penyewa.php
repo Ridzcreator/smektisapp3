@@ -145,9 +145,18 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                                <button type="submit" class="btn btn-primary">Lihat Lokasi Penyewa</button>
-                                                                <!-- <a href="wa.me/62895366446634" class="btn btn-success">Hubungi Penyewa</a> -->
-                                                                <button type="submit" class="btn btn-success" onclick="window.location.replace('wa.me/62895366446634');">Hubungi Penyewa</button>
+                                                                <?php 
+                                                                $search = str_replace(" ", "+", $p->alamat);
+                                                                $link_lokasi = "https://www.google.co.id/maps/place/" . $search;
+                                                                 ?>
+
+                                                                <a type="button" href="<?= $link_lokasi; ?>" class="btn btn-primary" target="_blank">Lihat Lokasi Penyewa</a>
+                                                                
+                                                                <?php 
+                                                                $message = "Kembalikan%20buff%20saya";
+                                                                $link = "https://api.whatsapp.com/send?phone=" . $p->no_telp . "&text=%20" . $message;
+                                                                 ?>
+                                                                <a type="button" href="<?= $link; ?>" class="btn btn-success" target="_blank">Hubungi Penyewa</a>
                                                             </div>
                                                         </form>
                                                     </div>
