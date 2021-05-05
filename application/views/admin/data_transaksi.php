@@ -206,7 +206,7 @@
                             <div class="form-group">
                                 <label for="penyewa_id">Penyewa</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="penyewa_id" id="inputGroupSelect01">
+                                    <select class="custom-select" name="penyewa_id" id="inputGroupSelect01" required>
                                         <option selected disabled value="">Pilih Penyewa</option>
                                         <?php
                                         foreach ($master_penyewa as $penyewa) {
@@ -221,7 +221,7 @@
                             <div class="form-group">
                                 <label for="kategori_id">Kategori Barang</label>
                                 <div class="input-group mb-3">
-                                    <select class="select2" name="kategori_ids[]" multiple="multiple" data-placeholder="Pilih Kategori Barang" id="pilihanKategori" style="width: 100%;" onchange="pilihKategori()">
+                                    <select class="select2" name="kategori_ids[]" multiple="multiple" data-placeholder="Pilih Kategori Barang" id="pilihanKategori" style="width: 100%;" onchange="pilihKategori()" required>
                                         <?php
                                         foreach ($master_kategori as $kategori) {
                                         ?>
@@ -234,23 +234,23 @@
                             </div>
                             <div class="form-group" id="formPilihBarang" style="display: none;">
                                 <label>Barang Sewa</label>
-                                <select class="select2" name="barang_pinjam_ids[]" multiple="multiple" data-placeholder="Pilih Barang Sewa" style="width: 100%;" id="pilihanBarangSewa">
+                                <select class="select2" name="barang_pinjam_ids[]" multiple="multiple" data-placeholder="Pilih Barang Sewa" style="width: 100%;" id="pilihanBarangSewa" required>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="tanggal_pinjam">Tanggal Pinjam</label>
                                 <div class="input-group">
-                                    <input type="datetime-local" class="form-control" name="tanggal_pinjam">
+                                    <input type="datetime-local" class="form-control" name="tanggal_pinjam" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="durasi">Durasi (hari)</label>
-                                <input type="number" class="form-control" name="durasi" placeholder="Masukkan durasi">
+                                <input type="number" class="form-control" name="durasi" placeholder="Masukkan durasi" required>
                             </div>
                             <div class="form-group">
                                 <label for="status_id">Status</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="status_id" id="inputGroupSelect01">
+                                    <select class="custom-select" name="status_id" id="inputGroupSelect01" required>
                                         <option selected disabled value="">Pilih Status Transaksi</option>
                                         <?php
                                         foreach ($master_status as $status) {
@@ -264,7 +264,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="jaminan">Jaminan</label>
-                                <input type="text" class="form-control" name="jaminan" placeholder="Masukkan jaminan (contoh: KTP,BPJS)">
+                                <input type="text" class="form-control" name="jaminan" placeholder="Masukkan jaminan (contoh: KTP,BPJS)" required>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

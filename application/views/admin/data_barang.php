@@ -39,7 +39,7 @@
                                         <th>Stok</th>
                                         <th>Kategori</th>
                                         <th>Keterangan</th>
-                                        <th>Foto</th>
+                                        <!-- <th>Foto</th> -->
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -59,7 +59,7 @@
                                             </td>
                                             <td><?= $b->kategori_nama; ?></td>
                                             <td><?= $b->keterangan; ?></td>
-                                            <td></td>
+                                            <!-- <td></td> -->
                                             <td class="d-flex justify-content-between">
                                                 <a class="text-link text-primary" href="#" title="Ubah" data-toggle="modal" data-target="#editModal<?= $b->b_id; ?>">
                                                     <i class="fas fa-edit"></i>
@@ -77,7 +77,7 @@
                                                         <h5 class="modal-title" id="exampleModalLabel">Ubah <?= $title; ?></h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="<?php echo base_url('admin/barang/editbarang' . $b->b_id); ?>" method="post">
+                                                        <form action="<?php echo base_url('admin/barang/editbarang/' . $b->b_id); ?>" method="post">
                                                             <div class="form-group">
                                                                 <label for="nama_barang">Nama Barang</label>
                                                                 <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)" value="<?= $b->nama_barang; ?>">
@@ -94,18 +94,18 @@
                                                                 <label for="kategori_id">Kategori Barang</label>
                                                                 <div class="input-group mb-3">
                                                                     <select class="custom-select" name="kategori_id" id="inputGroupSelect01">
-                                                                        <option selected disabled value="<?= $b_id->kategori_nama; ?>">Pilih Kategori Barang</option>
+                                                                        <option selected value="">Pilih Kategori Barang</option>
                                                                         <?php
                                                                         foreach ($master_kategori as $kategori) {
                                                                         ?>
-                                                                            <option value="<?= $kategori->id; ?>"><?= $kategori->nama; ?></option>
+                                                                            <option value="<?= $kategori->id; ?>" <?= $b->k_id == $kategori->id ? 'selected' : ''; ?>><?= $kategori->nama; ?></option>
                                                                         <?php
                                                                         }
                                                                         ?>
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <!-- <div class="form-group">
                                                                 <label for="exampleFormControlTextarea1">Tambah Foto Barang</label>
                                                                 <div class="input-group mb-3">
                                                                     <div class="custom-file">
@@ -116,12 +116,10 @@
                                                                         <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="form-group">
-                                                                <div class="form-group">
-                                                                    <label for="exampleFormControlTextarea1">Keterangan Barang</label>
-                                                                    <textarea class="form-control" name="keterangan_barang" id="exampleFormControlTextarea1" rows="3" value=""><?= $b_id->keterangan; ?></textarea>
-                                                                </div>
+                                                                <label for="exampleFormControlTextarea1">Keterangan Barang</label>
+                                                                <textarea class="form-control" name="keterangan_barang" value=""><?= $b->keterangan; ?></textarea>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -181,20 +179,20 @@
                         <form action="<?php echo base_url('admin/barang/tambahbarang'); ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nama_barang">Nama Barang</label>
-                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)">
+                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)" required>
                             </div>
                             <div class="form-group">
                                 <label for="penyewa">Harga Barang</label>
-                                <input type="nama" class="form-control" name="harga_barang" placeholder="Masukkan Harga Sewa Barang">
+                                <input type="text" class="form-control" name="harga_barang" placeholder="Masukkan Harga Sewa Barang" required>
                             </div>
                             <div class="form-group">
                                 <label for="penyewa">Stok Barang</label>
-                                <input type="nama" class="form-control" name="stok_barang" placeholder="Masukkan Jumblah Barang">
+                                <input type="text" class="form-control" name="stok_barang" placeholder="Masukkan Jumblah Barang" required>
                             </div>
                             <div class="form-group">
                                 <label for="kategori_id">Kategori Barang</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="kategori_id" id="inputGroupSelect01">
+                                    <select class="custom-select" name="kategori_id" id="inputGroupSelect01" required>
                                         <option selected disabled value="">Pilih Kategori Barang</option>
                                         <?php
                                         foreach ($master_kategori as $kategori) {
@@ -206,20 +204,18 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Tambah Foto Barang</label>
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
-                                        <input type="file" name="image" id="image" class="custom-file-input">
+                                        <input type="file" name="userfile"  class="custom-file-input">
                                         <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Pilih Foto</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Keterangan Barang</label>
-                                    <textarea class="form-control" name="keterangan_barang" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
+                                <label for="exampleFormControlTextarea1">Keterangan Barang</label>
+                                <textarea class="form-control" name="keterangan_barang" id="exampleFormControlTextarea1" rows="3" required></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

@@ -146,7 +146,8 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                                 <button type="submit" class="btn btn-primary">Lihat Lokasi Penyewa</button>
-                                                                <button type="submit" class="btn btn-success">Hubungi Penyewa</button>
+                                                                <!-- <a href="wa.me/62895366446634" class="btn btn-success">Hubungi Penyewa</a> -->
+                                                                <button type="submit" class="btn btn-success" onclick="window.location.replace('wa.me/62895366446634');">Hubungi Penyewa</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -201,28 +202,28 @@
                         <form action="<?php echo base_url('admin/penyewa/save'); ?>" method="post">
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="nama" class="form-control" name="nama" placeholder="Masukkan Nama Penyewa">
+                                <input type="nama" class="form-control" name="nama" placeholder="Masukkan Nama Penyewa" required>
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <input type="alamat" class="form-control" name="alamat" placeholder="Masukkan Alamat Penyewa">
+                                <input type="alamat" class="form-control" name="alamat" placeholder="Masukkan Alamat Penyewa" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Masukkan Email Penyewa">
+                                <input type="email" class="form-control" name="email" placeholder="Masukkan Email Penyewa" required>
                             </div>
                             <div class="form-group">
                                 <label for="no_telp">Nomor Telpon</label>
-                                <input type="no_telp" class="form-control" name="no_telp" placeholder="Masukkan Nomor Telpon Penyewa">
+                                <input type="no_telp" class="form-control" name="no_telp" placeholder="Masukkan Nomor Telpon Penyewa" required>
                             </div>
                             <div class="form-group">
                                 <label for="media_sosial">Media Sosial</label>
-                                <input type="media_sosial" class="form-control" name="media_sosial" placeholder="Masukkan Media Sosial Penyewa">
+                                <input type="media_sosial" class="form-control" name="media_sosial" placeholder="Masukkan Media Sosial Penyewa" required>
                             </div>
                             <div class="form-group">
                                 <label for="jenis_kelamin">Jenis Kelamin</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="jenis_kelamin">
+                                    <select class="custom-select" name="jenis_kelamin" required>
                                         <option selected disabled>Pilih Jenis Kelamin Penyewa</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
