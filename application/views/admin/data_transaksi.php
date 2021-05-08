@@ -66,7 +66,7 @@
                                             <td><?= $data->status_nama; ?></td>
                                             <td><?= $data->alamat; ?></td>
                                             <td class="d-flex justify-content-between">
-                                                <a class="text-link text-dark" href="<?php echo base_url('admin/Nota'); ?>" title="Print" target="_blank">
+                                                <a class="text-link text-dark" href="<?php echo base_url('admin/transaksi/nota/' . $data->t_id); ?>" title="Print" target="_blank">
                                                     <i class="fa fa-print"></i>
                                                 </a>
                                                 <a class="text-link text-primary" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $data->t_id; ?>">

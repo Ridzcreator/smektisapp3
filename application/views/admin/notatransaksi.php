@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Invoice Print</title>
+    <title><?= $title; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -45,19 +45,18 @@
                 <div class="col-sm-4 invoice-col">
                     To
                     <address>
-                        <strong>Mohamad Nur Riduwan</strong><br>
-                        Jl Tumapel VII No.14<br>
-                        Phone: (555) 539-1037<br>
-                        Email: john.doe@example.com
+                        <strong><?= $transaksi->penyewa_nama; ?></strong><br>
+                        <?= $transaksi->alamat; ?><br>
+                        Phone: <?= $transaksi->no_telp; ?><br>
+                        Email: <?= $transaksi->email; ?>
                     </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                    <b>Invoice #007612</b><br>
+                    <b>Invoice #<?= $transaksi->t_id; ?></b><br>
                     <br>
-                    <b>Order ID:</b> 4F3S8J<br>
-                    <b>Payment Due:</b> <?= date(' d-m-Y '); ?><br>
-                    <b>Account:</b> 968-34567
+                    <b>Return:</b> <?= date("d/m/Y H:i:s", strtotime('+' . ($transaksi->durasi * 24) . ' hours', strtotime($transaksi->tanggal_pinjam))); ?><br>
+                    <b>Account:</b> <?= $transaksi->p_id; ?>
                 </div>
                 <!-- /.col -->
             </div>
@@ -77,34 +76,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Call of Duty</td>
-                                <td>455-981-221</td>
-                                <td>El snort testosterone trophy driving gloves handsome</td>
-                                <td>$64.50</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Need for Speed IV</td>
-                                <td>247-925-726</td>
-                                <td>Wes Anderson umami biodiesel</td>
-                                <td>$50.00</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Monsters DVD</td>
-                                <td>735-845-642</td>
-                                <td>Terry Richardson helvetica tousled street art master</td>
-                                <td>$10.70</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Grown Ups Blue Ray</td>
-                                <td>422-568-642</td>
-                                <td>Tousled lomo letterpress</td>
-                                <td>$25.99</td>
-                            </tr>
+                            <?php 
+                            $no = 0;
+                            $total = 0;
+                            foreach ($barang_pinjam as $barang) {
+                                $no++;
+                                $subtotal = $barang->jumlah * $barang->harga;
+                                $total += $subtotal;
+                                echo "
+                                    <tr>
+                                        <td>$no</td>
+                                        <td>$barang->nama</td>
+                                        <td>$barang->jumlah</td>
+                                        <td>$barang->harga</td>
+                                        <td>$subtotal</td>
+                                    </tr>
+                                ";
+                            }
+                             ?>
                         </tbody>
                     </table>
                 </div>
@@ -134,7 +123,7 @@
                         <table class="table">
                             <tr>
                                 <th style="width:50%">Total:</th>
-                                <td>$250.30</td>
+                                <td><?= $total; ?></td>
                             </tr>
                             <!-- <tr>
                                 <th>Tax (9.3%)</th>

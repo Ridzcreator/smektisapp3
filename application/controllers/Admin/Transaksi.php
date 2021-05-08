@@ -122,4 +122,19 @@ class Transaksi extends CI_Controller
 
         redirect('admin/transaksi/index');
     }
+
+    public function nota($id) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // verifikasi apakah user sudah login
+        $this->auth->isLoggedIn();
+
+        $data['title'] = "Nota Transaksi";
+        $data['transaksi'] = $this->transaksi_model->getDataTransaksi($id);
+        $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id'], $id);
+
+        $this->load->view('admin/notatransaksi', $data);
+    }
 }

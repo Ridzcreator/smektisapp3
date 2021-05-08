@@ -154,6 +154,7 @@
 
                                                                 <?php
                                                                 $message = "Kembalikan%20buff%20saya";
+                                                                $p->no_telp = substr($p->no_telp, 0, 1) == '+' ? substr($p->no_telp, 1) : (substr($p->no_telp, 0, 1) == '0' ? '62' . substr($p->no_telp, 1) : $p->no_telp);
                                                                 $link = "https://api.whatsapp.com/send?phone=" . $p->no_telp . "&text=%20" . $message;
                                                                 ?>
                                                                 <a type="button" href="<?= $link; ?>" class="btn btn-success" target="_blank">Hubungi Penyewa</a>
