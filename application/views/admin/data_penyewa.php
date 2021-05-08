@@ -28,7 +28,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -58,7 +58,7 @@
                                                 <a class="text-link text-warning" href="#" title="Detail" data-toggle="modal" data-target="#detailModal<?= $p->id; ?>">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
-                                                <a class="text-link text-primary" href="#" title="Hapus" data-toggle="modal" data-target="#editModal<?= $p->id; ?>">
+                                                <a class="text-link text-primary" href="#" title="Ubah" data-toggle="modal" data-target="#editModal<?= $p->id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a class="text-link text-danger" href="#" title="Hapus" data-toggle="modal" data-target="#hapusModal<?= $p->id; ?>">
@@ -145,17 +145,17 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                                <?php 
+                                                                <?php
                                                                 $search = str_replace(" ", "+", $p->alamat);
                                                                 $link_lokasi = "https://www.google.co.id/maps/place/" . $search;
-                                                                 ?>
+                                                                ?>
 
                                                                 <a type="button" href="<?= $link_lokasi; ?>" class="btn btn-primary" target="_blank">Lihat Lokasi Penyewa</a>
-                                                                
-                                                                <?php 
+
+                                                                <?php
                                                                 $message = "Kembalikan%20buff%20saya";
                                                                 $link = "https://api.whatsapp.com/send?phone=" . $p->no_telp . "&text=%20" . $message;
-                                                                 ?>
+                                                                ?>
                                                                 <a type="button" href="<?= $link; ?>" class="btn btn-success" target="_blank">Hubungi Penyewa</a>
                                                             </div>
                                                         </form>

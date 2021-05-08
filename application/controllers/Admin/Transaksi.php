@@ -105,6 +105,11 @@ class Transaksi extends CI_Controller
         redirect('admin/transaksi/index');
     }
 
+    public function print($t_id)
+    {
+        $this->transaksi_model->getDataTransaksi($t_id);
+    }
+
     public function selesai($id)
     {
         $date = new DateTime("now", new DateTimeZone('Asia/Jakarta'));

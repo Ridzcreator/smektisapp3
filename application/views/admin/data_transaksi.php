@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><i class="fa fa-address-card text-primary"></i> Data Transaksi</h1>
+                    <h1><i class="nav-icon fa fa-cart-plus text-primary"></i> Data Transaksi</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -29,7 +29,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -66,7 +66,7 @@
                                             <td><?= $data->status_nama; ?></td>
                                             <td><?= $data->alamat; ?></td>
                                             <td class="d-flex justify-content-between">
-                                                <a class="text-link text-dark" href="#" title="Print">
+                                                <a class="text-link text-dark" href="<?php echo base_url('admin/Nota'); ?>" title="Print" target="_blank">
                                                     <i class="fa fa-print"></i>
                                                 </a>
                                                 <a class="text-link text-primary" href="#" title="Edit" data-toggle="modal" data-target="#editModal<?= $data->t_id; ?>">
@@ -86,7 +86,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit <?= $title; ?></h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Ubah <?= $title; ?></h5>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="<?php echo base_url('admin/transaksi/edit/' . $data->t_id); ?>" method="post">

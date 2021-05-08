@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><i class="fa fa-address-card text-primary"></i> Laporan</h1>
+                    <h1><i class="nav-icon fa fa-file text-primary"></i> Laporan</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -23,13 +23,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal"><i class="fa fa-plus-circle"></i> Tambah</button>
-                            <!-- <h3 class="card-title" style="width: 100%;"><marquee behavior="" direction="left">Ini info terbaru</marquee></h3> -->
-                        </div>
+                            <h3 class="card-title" style="width: 100%;"><marquee behavior="" direction="left">Ini info terbaru</marquee></h3>
+                        </div> -->
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -43,23 +43,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="d-flex justify-content-between">
-                                            <a class="text-link text-primary" href="#" title="Detail">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                            <a class="text-link text-dark" href="#" title="Print">
-                                                <i class="fa fa-print"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($transaksi as $data) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="d-flex justify-content-between">
+                                                <a class="text-link text-primary" href="<?php echo base_url('admin/Nota'); ?>" title="Detail">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                                <a class="text-link text-dark" href="#" title="Print">
+                                                    <i class="fa fa-print"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
 
                             </table>

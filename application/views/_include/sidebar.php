@@ -44,7 +44,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <span class="dropdown-item dropdown-header"><span id="jumlah_notifikasi">15</span> Notifikasi</span>
             <div class="dropdown-divider"></div>
             <div id="list_notifikasi">
-                <!-- List notifikasi -->
+              <!-- List notifikasi -->
             </div>
             <a href="<?php echo base_url('admin/transaksi') ?>" class="dropdown-item dropdown-footer">Lihat semua transaksi</a>
           </div>
@@ -120,75 +120,73 @@ if (session_status() == PHP_SESSION_NONE) {
     </aside>
 
     <script type="text/javascript">
-        var data_transaksi = [];
-        var data_penyewa = [];
-        <?php 
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '';
-            $dbname = 'smektisdb';
+      var data_transaksi = [];
+      var data_penyewa = [];
+      <?php
+      $servername = 'localhost';
+      $username = 'root';
+      $password = '';
+      $dbname = 'smektisdb';
 
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die('Connection failed: ' . $conn->connect_error);
-            }
+      // Create connection
+      $conn = new mysqli($servername, $username, $password, $dbname);
+      // Check connection
+      if ($conn->connect_error) {
+        die('Connection failed: ' . $conn->connect_error);
+      }
 
-            $sql_penyewa = "
+      $sql_penyewa = "
                 SELECT
                     *
                 FROM penyewa
                 ";
-            $result_penyewa = $conn->query($sql_penyewa);
+      $result_penyewa = $conn->query($sql_penyewa);
 
-            $data_penyewa = array();
+      $data_penyewa = array();
 
-            $sql = "
+      $sql = "
                 SELECT
                     *,
                     TIMESTAMPDIFF(HOUR,NOW(), DATE_ADD(tanggal_pinjam, INTERVAL durasi DAY)) AS hour
                 FROM transaksi
                 ";
-            $result = $conn->query($sql);
+      $result = $conn->query($sql);
 
-            $data_transaksi = array();
+      $data_transaksi = array();
 
-            if ($result_penyewa->num_rows > 0) {
-                // output data of each row
-                while($row_penyewa = $result_penyewa->fetch_assoc()) {
-                    array_push($data_penyewa, $row_penyewa);
-                }
+      if ($result_penyewa->num_rows > 0) {
+        // output data of each row
+        while ($row_penyewa = $result_penyewa->fetch_assoc()) {
+          array_push($data_penyewa, $row_penyewa);
+        }
+      }
+
+      if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+          array_push($data_transaksi, $row);
+        }
+      }
+
+      echo "data_penyewa = " . json_encode($data_penyewa) . ";";
+      echo "data_transaksi = " . json_encode($data_transaksi) . ";";
+
+      $conn->close();
+      ?>
+
+      var notifikasi = "";
+
+      data_transaksi.forEach(function(transaksi) {
+        if (transaksi.hour <= 0) {
+          data_penyewa.forEach(function(penyewa) {
+            if (penyewa.id == transaksi.penyewa_id) {
+              notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-muted text-sm'>" + transaksi.hour + " hours</span></a><div class='dropdown-divider'></div>";
             }
+          });
+        }
+      });
 
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    array_push($data_transaksi, $row);
-                }
-            }
-
-            echo "data_penyewa = " . json_encode($data_penyewa) . ";";
-            echo "data_transaksi = " . json_encode($data_transaksi) . ";";
-
-            $conn->close();
-         ?>
-
-        var notifikasi = "";
-
-        data_transaksi.forEach( function(transaksi) {
-            if (transaksi.hour <= 3) {
-                data_penyewa.forEach( function(penyewa) {
-                    if (penyewa.id == transaksi.penyewa_id) {
-                        notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-muted text-sm'>" + transaksi.hour + " hours</span></a><div class='dropdown-divider'></div>";
-                    }
-                });
-            }
-        });
-
-        document.getElementById('jumlah_notifikasi_small').textContent = notifikasi.length;
-        document.getElementById('jumlah_notifikasi').textContent = notifikasi.length;
-        document.getElementById('list_notifikasi').innerHTML = notifikasi;
+      document.getElementById('jumlah_notifikasi_small').textContent = notifikasi.length;
+      document.getElementById('jumlah_notifikasi').textContent = notifikasi.length;
+      document.getElementById('list_notifikasi').innerHTML = notifikasi;
     </script>
-
-    

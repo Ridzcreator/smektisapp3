@@ -42,20 +42,29 @@
       $(function() {
         //Initialize Select2 Elements
         $('.select2').select2();
-        // "copy", "csv", "excel", "pdf", "print", 
-        $("#example1").DataTable({
-          "responsive": true,
-          "lengthChange": false,
-          "autoWidth": false,
-          "buttons": ["colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-        $("#barang_table").DataTable({
+        $("#example").DataTable({
           "responsive": true,
           "lengthChange": false,
           "autoWidth": false,
           "buttons": ["colvis"]
-        }).buttons().container().appendTo('#barang_table_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+
+        // "copy", "csv", "excel", "pdf", "print", 
+        // $("#example1").DataTable({
+        //   "responsive": true,
+        //   "lengthChange": false,
+        //   "autoWidth": false,
+        //   "buttons": ["colvis"]
+        // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        // $("#laporan_table").DataTable({
+        //   "responsive": true,
+        //   "lengthChange": false,
+        //   "autoWidth": false,
+        //   "buttons": ["colvis"]
+        // }).buttons().container().appendTo('#laporan_table_wrapper .col-md-6:eq(0)');
+
 
         $('#example2').DataTable({
           "paging": true,

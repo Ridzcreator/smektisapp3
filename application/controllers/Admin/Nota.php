@@ -1,5 +1,5 @@
 <?php
-class Laporan extends CI_Controller
+class Nota extends CI_Controller
 {
     function __construct()
     {
@@ -11,7 +11,6 @@ class Laporan extends CI_Controller
         $this->load->model('status_model');
         $this->load->model('barang_pinjam_model');
 
-
         // load auth controller
         require(APPPATH . 'controllers/Auth.php');
         $this->auth = new Auth();
@@ -19,10 +18,15 @@ class Laporan extends CI_Controller
 
     public function index()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
         // verifikasi apakah user sudah login
         $this->auth->isLoggedIn();
 
-        $side['title'] = "Laporan";
+        $side['title'] = "Data Transaksi";
+
         $data['master_penyewa'] = $this->penyewa_model->getMaster();
         $data['transaksi'] = $this->transaksi_model->getDataTransaksi();
         $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id']);
@@ -30,8 +34,6 @@ class Laporan extends CI_Controller
         $data['master_barang'] = $this->barang_model->getMaster();
         $data['master_status'] = $this->status_model->getMaster();
 
-        $this->load->view('_include/sidebar', $side);
-        $this->load->view('admin/laporan', $data);
-        $this->load->view('_include/footer');
+        $this->load->view('admin/notatransaksi', $data);
     }
 }
