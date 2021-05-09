@@ -178,7 +178,7 @@ if (session_status() == PHP_SESSION_NONE) {
     var notifikasiLength = 0;
 
     data_transaksi.forEach(function(transaksi) {
-        if (transaksi.hour <= 100) {
+        if (transaksi.hour <= 100 && !transaksi.tanggal_kembali) {
             data_penyewa.forEach(function(penyewa) {
                 if (penyewa.id == transaksi.penyewa_id) {
                     notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-sm " + (transaksi.hour < 0 ? 'text-danger' : 'text-muted') + "'>" + (transaksi.hour >= 0 ? transaksi.hour : 'telat ' + (transaksi.hour * -1)) + " jam</span></a><div class='dropdown-divider'></div>";

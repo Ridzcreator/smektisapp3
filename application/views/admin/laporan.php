@@ -31,46 +31,64 @@
                         <div class="card-body">
                             <section class="content">
                                 <div class="container-fluid">
-                                    <form action="enhanced-results.html">
+                                    <form action="<?php echo base_url('admin/laporan'); ?>" method="post">
                                         <div class="row">
                                             <div class="col-md-10 offset-md-1">
                                                 <div class="row">
-                                                    <div class="col-6">
+                                                    <div class="col-5">
                                                         <div class="form-group">
                                                             <label>Kategori:</label>
-                                                            <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%;">
-                                                                <option>Text only</option>
-                                                                <option>Images</option>
-                                                                <option>Video</option>
-                                                            </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-5">
+                                                        <!-- Date range -->
                                                         <div class="form-group">
-                                                            <label>Bulan</label>
-                                                            <select class="select2" style="width: 100%;">
-                                                                <option selected>ASC</option>
-                                                                <option>DESC</option>
-                                                            </select>
+                                                            <label>Date range:</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-2">
                                                         <div class="form-group">
-                                                            <label>Tahun</label>
-                                                            <select class="select2" style="width: 100%;">
-                                                                <option selected>Title</option>
-                                                                <option>Date</option>
-                                                            </select>
+                                                            <label></label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="input-group input-group-lg">
-                                                        <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum">
-                                                        <div class="input-group-append">
-                                                            <button type="submit" class="btn btn-lg btn-default">
-                                                                <i class="fa fa-search"></i>
-                                                            </button>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-0">
+                                            <div class="col-md-10 offset-md-1">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <div class="form-group">
+                                                            <select class="select2" name="kategori[]" multiple="multiple" data-placeholder="Pilih Kategori" style="width: 100%;" name="kategori">
+                                                                <?php 
+                                                                foreach ($master_kategori as $key => $kategori) {
+                                                                    echo "<option value='$kategori->id'>$kategori->nama</option>";
+                                                                }
+                                                                 ?>
+                                                            </select>
+                                                        </div>
+                                                        <input hidden type="date" name="date_start" id="date_start">
+                                                        <input hidden type="date" name="date_end" id="date_end">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <!-- Date range -->
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <i class="far fa-calendar-alt"></i>
+                                                                    </span>
+                                                                </div>
+                                                                <input type="text" class="form-control float-right" name="daterange">
+                                                            </div>
+                                                            <!-- /.input group -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <button type="submit" class="btn btn-primary form-control float-right"><i class="fa fa-search"></i> Go</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -79,7 +97,7 @@
                                     </form>
                                 </div>
                             </section>
-                            <table id="laporan" class="table table-bordered table-striped">
+                            <table id="example" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -96,6 +114,7 @@
                                     <?php
                                     $no = 1;
                                     foreach ($transaksi as $data) {
+                                        if ($data->tanggal_kembali != "") {
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
@@ -121,7 +140,7 @@
                                                 </a>
                                             </td> -->
                                         </tr>
-                                    <?php } ?>
+                                    <?php }} ?>
                                 </tbody>
 
                             </table>

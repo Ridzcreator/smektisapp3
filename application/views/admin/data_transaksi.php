@@ -46,6 +46,7 @@
                                     <?php
                                     $no = 1;
                                     foreach ($transaksi as $data) {
+                                        if ($data->tanggal_kembali == "") {
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
@@ -180,7 +181,7 @@
                                             </div>
                                         </div>
                                         <!-- End Selesai Modal -->
-                                    <?php } ?>
+                                    <?php }} ?>
                                 </tbody>
                             </table>
                         </div>

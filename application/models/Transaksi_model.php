@@ -1,7 +1,7 @@
 <?php
 class Transaksi_model extends CI_Model
 {
-    public function getDataTransaksi($id = null)
+    public function getDataTransaksi($id = null, $kategori = null, $date_start = null, $date_end = null)
     {
         $this->db->select('
         	*,
@@ -14,7 +14,21 @@ class Transaksi_model extends CI_Model
         $this->db->from('transaksi');
         $this->db->join('penyewa', 'penyewa_id = penyewa.id');
         $this->db->join('status', 'status_id = status.id');
-        $this->db->where('transaksi.tanggal_kembali', NULL, FALSE);
+        
+        // $this->db->where('transaksi.tanggal_kembali', NULL, FALSE);
+
+        // if (!is_null($kategori)) {
+        //     $this->db->where_in('username', $names);
+        //     # code...
+        // }
+
+        if (!is_null($date_start)) {
+            $this->db->where('tanggal_pinjam >=', $date_start);
+        }
+
+        if (!is_null($date_end)) {
+            $this->db->where('tanggal_pinjam <=', $date_end);
+        }
 
         if (!is_null($id)) {
             $this->db->where('transaksi.id', $id);
