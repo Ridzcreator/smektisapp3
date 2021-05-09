@@ -34,7 +34,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Nama</th>
-                                        <th>Barang Dipinjam</th>
+                                        <th>Barang Disewa</th>
                                         <th>Tanggal Sewa/Pinjam</th>
                                         <th>Tanggal Kembali</th>
                                         <th>Status</th>

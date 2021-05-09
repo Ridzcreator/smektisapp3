@@ -29,17 +29,67 @@
                         </div> -->
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example" class="table table-bordered table-striped">
+                            <section class="content">
+                                <div class="container-fluid">
+                                    <form action="enhanced-results.html">
+                                        <div class="row">
+                                            <div class="col-md-10 offset-md-1">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label>Kategori:</label>
+                                                            <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%;">
+                                                                <option>Text only</option>
+                                                                <option>Images</option>
+                                                                <option>Video</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label>Bulan</label>
+                                                            <select class="select2" style="width: 100%;">
+                                                                <option selected>ASC</option>
+                                                                <option>DESC</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label>Tahun</label>
+                                                            <select class="select2" style="width: 100%;">
+                                                                <option selected>Title</option>
+                                                                <option>Date</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-lg">
+                                                        <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum">
+                                                        <div class="input-group-append">
+                                                            <button type="submit" class="btn btn-lg btn-default">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                            <table id="laporan" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
                                         <th>Bulan</th>
+                                        <th>Nama Penyewa</th>
+                                        <th>Barang Disewa</th>
                                         <th>Tanggal Sewa/Pinjam</th>
                                         <th>Tanggal Kembali</th>
-                                        <th>Nama Penyewa</th>
                                         <th>Status</th>
                                         <th>Total</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,24 +100,34 @@
                                         <tr>
                                             <td><?= $no++; ?></td>
                                             <td></td>
+                                            <td><?= $data->penyewa_nama; ?></td>
+                                            <td>
+                                                <?php
+                                                $transaksi_barang[$no - 1] = [];
+                                                foreach ($barang_pinjam as $b) {
+                                                    if ($b->t_id == $data->t_id) {
+                                                        array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                                    }
+                                                }
+                                                echo implode(', ', $transaksi_barang[$no - 1]);
+                                                ?></td>
+                                            <td><?= $data->tanggal_pinjam; ?></td>
+                                            <td><?= $data->tanggal_kembali; ?></td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="d-flex justify-content-between">
+                                            <!-- <td class="d-flex justify-content-between">
                                                 <a class="text-link text-primary" href="<?php echo base_url('admin/Nota'); ?>" title="Detail">
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
-                                                <a class="text-link text-dark" href="#" title="Print">
-                                                    <i class="fa fa-print"></i>
-                                                </a>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     <?php } ?>
                                 </tbody>
 
                             </table>
+                            <div class="card-header">
+                                <a type="button" class="btn btn-outline-primary float-right" href="<?php echo base_url('admin/laporan/print/' . $data->t_id); ?>" target="_blank"><i class="fa fa-print"></i> Cetak Laporan</a>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>

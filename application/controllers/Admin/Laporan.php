@@ -34,4 +34,20 @@ class Laporan extends CI_Controller
         $this->load->view('admin/laporan', $data);
         $this->load->view('_include/footer');
     }
+
+    public function print($id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // verifikasi apakah user sudah login
+        $this->auth->isLoggedIn();
+
+        $data['title'] = "Laporan Persewaan";
+        $data['transaksi'] = $this->transaksi_model->getDataTransaksi($id);
+        $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id'], $id);
+
+        $this->load->view('admin/cetaklaporan', $data);
+    }
 }
