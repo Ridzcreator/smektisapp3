@@ -68,7 +68,6 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Bulan</th>
                                         <th>Nama Penyewa</th>
                                         <th>Barang Disewa</th>
                                         <th>Tanggal Sewa/Pinjam</th>
@@ -85,14 +84,15 @@
                                     ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
-                                                <td></td>
                                                 <td><?= $data->penyewa_nama; ?></td>
                                                 <td>
                                                     <?php
-                                                    $transaksi_barang[$no - 1] = [];
+                                                    $transaksi_barang[$no-1] = [];
+                                                    $total = 0;
                                                     foreach ($barang_pinjam as $b) {
                                                         if ($b->t_id == $data->t_id) {
-                                                            array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                                            array_push($transaksi_barang[$no-1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                                            $total += ($b->harga * $b->jumlah);
                                                         }
                                                     }
                                                     echo implode(', ', $transaksi_barang[$no - 1]);
@@ -102,11 +102,6 @@
                                                 <td><?= $data->status_nama; ?></td>
                                                 <td>
                                                     <?php
-                                                    $total = 0;
-                                                    foreach ($barang_pinjam as $data) {
-                                                        $subtotal = $data->jumlah * $data->harga;
-                                                        $total += $subtotal;
-                                                    }
                                                     echo $total;
                                                     ?>
                                                 </td>
@@ -117,7 +112,11 @@
 
                             </table>
                             <div class="card-header">
-                                <a type="button" class="btn btn-outline-primary float-right" href="<?php echo base_url('admin/laporan/print/' . $data->t_id); ?>" target="_blank"><i class="fa fa-print"></i> Cetak Laporan</a>
+                                <form action="<?php echo base_url('admin/laporan/print'); ?>" method="post" target="_blank">
+                                    <input hidden type="text" name="date_start" value="<?= isset($date_start) ? $date_start : ''; ?>">
+                                    <input hidden type="text" name="date_start" value="<?= isset($date_end) ? $date_end : ''; ?>">
+                                    <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-print"></i> Cetak Laporan</button>
+                                </form>
                             </div>
                         </div>
                         <!-- /.card-body -->

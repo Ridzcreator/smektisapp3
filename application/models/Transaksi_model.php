@@ -1,7 +1,7 @@
 <?php
 class Transaksi_model extends CI_Model
 {
-    public function getDataTransaksi($id = null, $kategori = null, $date_start = null, $date_end = null)
+    public function getDataTransaksi($id = null, $date_start = null, $date_end = null)
     {
         $this->db->select('
         	*,

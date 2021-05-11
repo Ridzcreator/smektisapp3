@@ -13,6 +13,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url('vendor/AdminLTE/plugins/fontawesome-free/css/all.min.css'); ?>">
     <!-- DataTables -->
@@ -147,7 +149,8 @@ if (session_status() == PHP_SESSION_NONE) {
         $sql = "
                 SELECT
                 *,
-                TIMESTAMPDIFF(HOUR,NOW(), DATE_ADD(tanggal_pinjam, INTERVAL durasi DAY)) AS hour
+                TIMESTAMPDIFF(HOUR,NOW(), DATE_ADD(tanggal_pinjam, INTERVAL durasi DAY)) AS hour,
+                TIMESTAMPDIFF(MINUTE,NOW(), DATE_ADD(tanggal_pinjam, INTERVAL durasi DAY)) AS minute
                 FROM transaksi
             ";
         $result = $conn->query($sql);
@@ -176,12 +179,18 @@ if (session_status() == PHP_SESSION_NONE) {
 
     var notifikasi = "";
     var notifikasiLength = 0;
+    var transaksi_type = "";
 
     data_transaksi.forEach(function(transaksi) {
         if (transaksi.hour <= 100 && !transaksi.tanggal_kembali) {
             data_penyewa.forEach(function(penyewa) {
                 if (penyewa.id == transaksi.penyewa_id) {
-                    notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-sm " + (transaksi.hour < 0 ? 'text-danger' : 'text-muted') + "'>" + (transaksi.hour >= 0 ? transaksi.hour : 'telat ' + (transaksi.hour * -1)) + " jam</span></a><div class='dropdown-divider'></div>";
+                    if (transaksi.hour != 0) {
+                        transaksi_type = (transaksi.hour < 0 ? "text-danger" : "text-muted") + "'>" + (transaksi.hour > 0 ? transaksi.hour : "telat " + (transaksi.hour * -1)) + " jam";
+                    } else {
+                        transaksi_type = (transaksi.minute >= 0 ? "text-muted'" + '>' + transaksi.minute : "text-danger'" + ">telat " + transaksi.minute) + " menit";
+                    }
+                    notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-sm " + transaksi_type + "</span></a><div class='dropdown-divider'></div>";
                     notifikasiLength++;
                 }
             });
