@@ -188,7 +188,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     if (transaksi.hour != 0) {
                         transaksi_type = (transaksi.hour < 0 ? "text-danger" : "text-muted") + "'>" + (transaksi.hour > 0 ? transaksi.hour : "telat " + (transaksi.hour * -1)) + " jam";
                     } else {
-                        transaksi_type = (transaksi.minute >= 0 ? "text-muted'" + '>' + transaksi.minute : "text-danger'" + ">telat " + transaksi.minute) + " menit";
+                        transaksi_type = (transaksi.minute >= 0 ? "text-muted'" + '>' + transaksi.minute : "text-danger'" + ">telat " + (transaksi.minute * -1)) + " menit";
                     }
                     notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-sm " + transaksi_type + "</span></a><div class='dropdown-divider'></div>";
                     notifikasiLength++;
