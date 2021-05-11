@@ -56,33 +56,39 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            $total = 0;
-                            foreach ($barang_pinjam as $data) {
-                                $subtotal = $data->jumlah * $data->harga;
-                                $total += $subtotal;
+                            foreach ($transaksi as $data) {
+                                if ($data->tanggal_kembali != "") {
                             ?>
-                                <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td></td>
-                                    <td><?= $transaksi->penyewa_nama; ?></td>
-                                    <td>
-                                        <?php
-                                        $transaksi_barang[$no - 1] = [];
-                                        foreach ($barang_pinjam as $b) {
-                                            if ($b->t_id == $data->t_id) {
-                                                array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td></td>
+                                        <td><?= $data->penyewa_nama; ?></td>
+                                        <td>
+                                            <?php
+                                            $transaksi_barang[$no - 1] = [];
+                                            foreach ($barang_pinjam as $b) {
+                                                if ($b->t_id == $data->t_id) {
+                                                    array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                                }
                                             }
-                                        }
-                                        echo implode(', ', $transaksi_barang[$no - 1]);
-                                        ?>
-                                    </td>
-                                    <td><?= $transaksi->tanggal_pinjam; ?></td>
-                                    <td><?= $transaksi->tanggal_kembali; ?></td>
-                                    <td><?= $transaksi->status_nama; ?></td>
-                                    <td><?= $total; ?></td>
-                                </tr>
-
-                            <?php } ?>
+                                            echo implode(', ', $transaksi_barang[$no - 1]);
+                                            ?></td>
+                                        <td><?= $data->tanggal_pinjam; ?></td>
+                                        <td><?= $data->tanggal_kembali; ?></td>
+                                        <td><?= $data->status_nama; ?></td>
+                                        <td>
+                                            <?php
+                                            $total = 0;
+                                            foreach ($barang_pinjam as $data) {
+                                                $subtotal = $data->jumlah * $data->harga;
+                                                $total += $subtotal;
+                                            }
+                                            echo $total;
+                                            ?>
+                                        </td>
+                                    </tr>
+                            <?php }
+                            } ?>
                         </tbody>
                     </table>
                 </div>

@@ -31,6 +31,7 @@
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/daterangepicker/daterangepicker.js') ?>"></script>
+    <script src="<?php echo base_url('vendor/AdminLTE/plugins/chart.js/Chart.min.js') ?>"></script>
 
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/moment/moment.min.js') ?>"></script>
     <script src="<?php echo base_url('vendor/AdminLTE/plugins/inputmask/jquery.inputmask.min.js') ?>"></script>
@@ -82,15 +83,15 @@
         });
       });
 
-        $(function() {
-            $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
-            }, function(start, end, label) {
-                document.getElementById("date_start").value = start.format('YYYY-MM-DD');
-                document.getElementById("date_end").value = end.format('YYYY-MM-DD');
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-            });
+      $(function() {
+        $('input[name="daterange"]').daterangepicker({
+          opens: 'left'
+        }, function(start, end, label) {
+          document.getElementById("date_start").value = start.format('YYYY-MM-DD');
+          document.getElementById("date_end").value = end.format('YYYY-MM-DD');
+          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
+      });
     </script>
     </body>
 

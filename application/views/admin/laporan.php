@@ -33,44 +33,17 @@
                                 <div class="container-fluid">
                                     <form action="<?php echo base_url('admin/laporan'); ?>" method="post">
                                         <div class="row">
-                                            <div class="col-md-10 offset-md-1">
-                                                <div class="row">
-                                                    <div class="col-5">
-                                                        <div class="form-group">
-                                                            <label>Kategori:</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-5">
-                                                        <!-- Date range -->
-                                                        <div class="form-group">
-                                                            <label>Date range:</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <div class="form-group">
-                                                            <label></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-0">
-                                            <div class="col-md-10 offset-md-1">
-                                                <div class="row">
-                                                    <div class="col-5">
-                                                        <div class="form-group">
-                                                            <select class="select2" name="kategori[]" multiple="multiple" data-placeholder="Pilih Kategori" style="width: 100%;" name="kategori">
-                                                                <?php 
-                                                                foreach ($master_kategori as $key => $kategori) {
-                                                                    echo "<option value='$kategori->id'>$kategori->nama</option>";
-                                                                }
-                                                                 ?>
-                                                            </select>
-                                                        </div>
+                                            <div class="col-md-6 offset-md-1">
+                                                <div class="float-right">
+                                                    <center>
+                                                        <label>Filter:</label>
+                                                    </center>
+                                                    <div class="row">
                                                         <input hidden type="date" name="date_start" id="date_start">
                                                         <input hidden type="date" name="date_end" id="date_end">
                                                     </div>
-                                                    <div class="col-5">
+                                                    <div class="row">
+
                                                         <!-- Date range -->
                                                         <div class="form-group">
                                                             <div class="input-group">
@@ -80,15 +53,9 @@
                                                                     </span>
                                                                 </div>
                                                                 <input type="text" class="form-control float-right" name="daterange">
+                                                                <button type="submit" class="btn btn-primary float-right"><i class="fa fa-search"></i> Cari</button>
                                                             </div>
                                                             <!-- /.input group -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <button type="submit" class="btn btn-primary form-control float-right"><i class="fa fa-search"></i> Go</button>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,31 +83,36 @@
                                     foreach ($transaksi as $data) {
                                         if ($data->tanggal_kembali != "") {
                                     ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td></td>
-                                            <td><?= $data->penyewa_nama; ?></td>
-                                            <td>
-                                                <?php
-                                                $transaksi_barang[$no - 1] = [];
-                                                foreach ($barang_pinjam as $b) {
-                                                    if ($b->t_id == $data->t_id) {
-                                                        array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                <td></td>
+                                                <td><?= $data->penyewa_nama; ?></td>
+                                                <td>
+                                                    <?php
+                                                    $transaksi_barang[$no - 1] = [];
+                                                    foreach ($barang_pinjam as $b) {
+                                                        if ($b->t_id == $data->t_id) {
+                                                            array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                                        }
                                                     }
-                                                }
-                                                echo implode(', ', $transaksi_barang[$no - 1]);
-                                                ?></td>
-                                            <td><?= $data->tanggal_pinjam; ?></td>
-                                            <td><?= $data->tanggal_kembali; ?></td>
-                                            <td></td>
-                                            <td></td>
-                                            <!-- <td class="d-flex justify-content-between">
-                                                <a class="text-link text-primary" href="<?php echo base_url('admin/Nota'); ?>" title="Detail">
-                                                    <i class="fas fa-info-circle"></i>
-                                                </a>
-                                            </td> -->
-                                        </tr>
-                                    <?php }} ?>
+                                                    echo implode(', ', $transaksi_barang[$no - 1]);
+                                                    ?></td>
+                                                <td><?= $data->tanggal_pinjam; ?></td>
+                                                <td><?= $data->tanggal_kembali; ?></td>
+                                                <td><?= $data->status_nama; ?></td>
+                                                <td>
+                                                    <?php
+                                                    $total = 0;
+                                                    foreach ($barang_pinjam as $data) {
+                                                        $subtotal = $data->jumlah * $data->harga;
+                                                        $total += $subtotal;
+                                                    }
+                                                    echo $total;
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
                                 </tbody>
 
                             </table>

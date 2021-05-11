@@ -26,7 +26,7 @@ class Laporan extends CI_Controller
         $date_start = null;
         $date_end = null;
 
-        if (! $kategori = $this->input->post('kategori')) {
+        if (!$kategori = $this->input->post('kategori')) {
             $kategori = null;
         }
 
@@ -61,8 +61,12 @@ class Laporan extends CI_Controller
         $this->auth->isLoggedIn();
 
         $data['title'] = "Laporan Persewaan";
-        $data['transaksi'] = $this->transaksi_model->getDataTransaksi($id);
-        $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id'], $id);
+        $data['master_penyewa'] = $this->penyewa_model->getMaster();
+        $data['transaksi'] = $this->transaksi_model->getDataTransaksi();
+        $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id']);
+        $data['master_kategori'] = $this->kategori_model->getMasterOnBarang();
+        $data['master_barang'] = $this->barang_model->getMaster();
+        $data['master_status'] = $this->status_model->getMaster();
 
         $this->load->view('admin/cetaklaporan', $data);
     }
