@@ -25,21 +25,6 @@ class Kategori_model extends CI_Model
         return $query->result();
     }
 
-    public function getKategoriSummary() {
-        $this->db->select('
-            kategori.nama as nama,
-            count(barang_pinjam.id) as total
-        ');
-
-        $this->db->from('kategori');
-        $this->db->join('barang', 'kategori.id = barang.kategori_id');
-        $this->db->join('barang_pinjam', 'barang.id = barang_pinjam.barang_id');
-        $this->db->group_by('kategori.id');
-        $query = $this->db->get();
-
-        return $query->result();
-    }
-
     public function create($data)
     {
         $this->db->insert('kategori', $data);
