@@ -44,7 +44,6 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Bulan</th>
                                 <th>Nama Penyewa</th>
                                 <th>Barang Disewa</th>
                                 <th>Tanggal Pinjam</th>
@@ -62,7 +61,6 @@
                             ?>
                                     <tr>
                                         <td><?= $no++; ?></td>
-                                        <td></td>
                                         <td><?= $data->penyewa_nama; ?></td>
                                         <td>
                                             <?php

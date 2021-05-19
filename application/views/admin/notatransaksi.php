@@ -54,7 +54,7 @@
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
                     <b>Invoice #<?= $transaksi->t_id; ?></b><br>
-                    <br>
+                    <b>Status :</b> <?= $transaksi->status_nama; ?><br>
                     <b>Return:</b> <?= date("d/m/Y H:i:s", strtotime('+' . ($transaksi->durasi * 24) . ' hours', strtotime($transaksi->tanggal_pinjam))); ?><br>
                     <b>Account:</b> <?= $transaksi->p_id; ?>
                 </div>
@@ -76,7 +76,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                             $no = 0;
                             $total = 0;
                             foreach ($barang_pinjam as $barang) {
@@ -93,7 +93,7 @@
                                     </tr>
                                 ";
                             }
-                             ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
