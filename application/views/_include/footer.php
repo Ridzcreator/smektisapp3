@@ -66,6 +66,10 @@
             "responsive": true,
         });
 
+        <?php 
+        if (isset($kategoriByBulan)) {
+         ?>
+
         var colorsRgba = [
             '23,162,184',
             '40,167,69',
@@ -169,6 +173,8 @@
             data: barChartData,
             options: barChartOptions
         })
+
+        <?php } ?>
 
     });
 

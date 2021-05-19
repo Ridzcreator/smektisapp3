@@ -43,7 +43,9 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                            <a class="small-box-footer">Jumlah Transaksi 
+                                <!-- <i class="fas fa-arrow-circle-right"></i> -->
+                            </a>
                         </div>
                     </div>
                 <?php 
@@ -55,7 +57,7 @@
             <!-- BAR CHART -->
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Bar Chart</h3>
+                    <h3 class="card-title">Jumlah Transaksi</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
