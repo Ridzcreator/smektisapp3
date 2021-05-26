@@ -35,6 +35,10 @@ class Laporan extends CI_Controller
             $data['date_end'] = $date_end;
         }
 
+        if ($daterange = $this->input->post('daterange')) {
+            $data['daterange'] = $daterange;
+        }
+
         $side['title'] = "Laporan";
         $data['master_penyewa'] = $this->penyewa_model->getMaster();
         $data['transaksi'] = $this->transaksi_model->getDataTransaksi(null, $date_start, $date_end);
@@ -70,7 +74,7 @@ class Laporan extends CI_Controller
 
         $data['title'] = "Print Laporan";
         $data['master_penyewa'] = $this->penyewa_model->getMaster();
-        $data['transaksi'] = $this->transaksi_model->getDataTransaksi(null, $kategori, $date_start, $date_end);
+        $data['transaksi'] = $this->transaksi_model->getDataTransaksi(null, $date_start, $date_end);
         $data['barang_pinjam'] = $this->barang_pinjam_model->getDataBarang($_SESSION['user_id']);
         $data['master_kategori'] = $this->kategori_model->getMasterOnBarang();
         $data['master_barang'] = $this->barang_model->getMaster();

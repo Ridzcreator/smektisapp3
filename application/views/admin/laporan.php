@@ -52,7 +52,7 @@
                                                                         <i class="far fa-calendar-alt"></i>
                                                                     </span>
                                                                 </div>
-                                                                <input type="text" class="form-control float-right" name="daterange">
+                                                                <input type="text" class="form-control float-right" name="daterange" <?= isset($daterange) ? 'value="'.$daterange.'"' : ''; ?>>
                                                                 <button type="submit" class="btn btn-primary float-right"><i class="fa fa-search"></i> Cari</button>
                                                             </div>
                                                             <!-- /.input group -->
@@ -114,7 +114,7 @@
                             <div class="card-header">
                                 <form action="<?php echo base_url('admin/laporan/print'); ?>" method="post" target="_blank">
                                     <input hidden type="text" name="date_start" value="<?= isset($date_start) ? $date_start : ''; ?>">
-                                    <input hidden type="text" name="date_start" value="<?= isset($date_end) ? $date_end : ''; ?>">
+                                    <input hidden type="text" name="date_end" value="<?= isset($date_end) ? $date_end : ''; ?>">
                                     <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-print"></i> Cetak Laporan</button>
                                 </form>
                             </div>
