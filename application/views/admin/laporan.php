@@ -87,11 +87,11 @@
                                                 <td><?= $data->penyewa_nama; ?></td>
                                                 <td>
                                                     <?php
-                                                    $transaksi_barang[$no-1] = [];
+                                                    $transaksi_barang[$no - 1] = [];
                                                     $total = 0;
                                                     foreach ($barang_pinjam as $b) {
                                                         if ($b->t_id == $data->t_id) {
-                                                            array_push($transaksi_barang[$no-1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
+                                                            array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
                                                             $total += ($b->harga * $b->jumlah);
                                                         }
                                                     }
