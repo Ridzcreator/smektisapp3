@@ -69,7 +69,7 @@
                                             foreach ($barang_pinjam as $b) {
                                                 if ($b->t_id == $data->t_id) {
                                                     array_push($transaksi_barang[$no - 1], $b->nama . ($b->jumlah > 1 ? (' (' . $b->jumlah . ')') : ''));
-                                                    $total += ($b->harga * $b->jumlah);
+                                                    $total += ($b->status_id == 1 ? 0 : $b->harga) * $b->jumlah;
                                                 }
                                             }
                                             $jumlah_transaksi += $total;

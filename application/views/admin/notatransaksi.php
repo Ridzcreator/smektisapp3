@@ -81,8 +81,15 @@
                             $total = 0;
                             foreach ($barang_pinjam as $barang) {
                                 $no++;
+                                // if ($barang->status_id == 1) {
+                                //     $barang->harga = 0;
+                                // }
+                                // $subtotal = $barang->jumlah * ($barang->status_id == 1 ? 0 : $barang->harga);
                                 $subtotal = $barang->jumlah * $barang->harga;
                                 $total += $subtotal;
+                                if ($barang->status_id == 1) {
+                                    $total = 0;
+                                }
                                 echo "
                                     <tr>
                                         <td>$no</td>
