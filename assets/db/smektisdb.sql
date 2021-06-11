@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2021 at 10:08 AM
--- Server version: 5.7.28
--- PHP Version: 7.4.12
+-- Generation Time: Jun 11, 2021 at 02:55 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,6 +31,7 @@ CREATE TABLE `barang` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `kategori_id` int(11) NOT NULL,
+  `kode_barang` varchar(11) DEFAULT NULL,
   `nama` varchar(100) NOT NULL,
   `harga` bigint(20) NOT NULL,
   `stok` int(11) NOT NULL,
@@ -42,15 +43,12 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `user_id`, `kategori_id`, `nama`, `harga`, `stok`, `keterangan`, `foto`) VALUES
-(1, 1, 1, 'Canon EOS 60D', 125000, 1, 'Boleh dipinjam kapan saja', '0'),
-(2, 1, 1, 'Sony A7ii', 250000, 5, 'Boleh dipinjam kapan saja', '0'),
-(11, 1, 2, 'Godox', 80000, 4, 'Lampu Flash', NULL),
-(12, 1, 2, 'LED 500 Watt', 150000, 3, 'lampu Terang benerang', NULL),
-(55, 1, 1, 'Rode Mic', 20000, 2, '', NULL),
-(56, 1, 1, 'Rode Mic', 20000, 2, '', NULL),
-(57, 1, 1, 'Rode Mic', 20000, 2, '', NULL),
-(58, 1, 1, 'Rode Mic', 20000, 2, '', '58_image');
+INSERT INTO `barang` (`id`, `user_id`, `kategori_id`, `kode_barang`, `nama`, `harga`, `stok`, `keterangan`, `foto`) VALUES
+(1, 1, 1, NULL, 'Canon EOS 60D', 125000, 1, 'Boleh dipinjam kapan saja', '0'),
+(2, 1, 1, NULL, 'Sony A7ii', 250000, 5, 'Boleh dipinjam kapan saja', '0'),
+(11, 1, 2, NULL, 'Godox', 80000, 4, 'Lampu Flash', NULL),
+(12, 1, 2, NULL, 'LED 500 Watt', 150000, 3, 'lampu Terang benerang', NULL),
+(59, 1, 6, NULL, 'ximatec', 15000, 1, 'biasa', NULL);
 
 -- --------------------------------------------------------
 
@@ -71,12 +69,19 @@ CREATE TABLE `barang_pinjam` (
 
 INSERT INTO `barang_pinjam` (`id`, `transaksi_id`, `barang_id`, `jumlah`) VALUES
 (20, 20, 2, 2),
-(21, 20, 56, 1),
 (22, 21, 11, 1),
 (23, 21, 12, 1),
 (24, 22, 12, 2),
 (25, 23, 2, 1),
-(26, 24, 11, 1);
+(26, 24, 11, 1),
+(27, 25, 2, 1),
+(28, 26, 1, 1),
+(29, 26, 2, 1),
+(30, 27, 59, 1),
+(32, 29, 1, 1),
+(33, 29, 2, 4),
+(35, 31, 2, 1),
+(40, 33, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -97,7 +102,8 @@ INSERT INTO `kategori` (`id`, `nama`) VALUES
 (4, 'Bahan Makanan'),
 (3, 'Gimbal'),
 (1, 'Kamera'),
-(2, 'Lighting');
+(2, 'Lighting'),
+(6, 'tripod');
 
 -- --------------------------------------------------------
 
@@ -108,6 +114,7 @@ INSERT INTO `kategori` (`id`, `nama`) VALUES
 CREATE TABLE `penyewa` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `kode_penyewa` varchar(15) DEFAULT NULL,
   `nama` varchar(100) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
@@ -120,9 +127,12 @@ CREATE TABLE `penyewa` (
 -- Dumping data for table `penyewa`
 --
 
-INSERT INTO `penyewa` (`id`, `user_id`, `nama`, `alamat`, `email`, `no_telp`, `media_sosial`, `jenis_kelamin`) VALUES
-(4, 1, 'Riduwan', 'Jl. Tumapel Singosari', 'riduwan@gmail.com', '+62895366446634', 'Ridz Creator', 'Laki-laki'),
-(5, 1, 'Sahabul Ashfari', 'Jl. Rogonoto Timur no.235', 'ahmarsahab13@gmail.com', '089680895777', 'Sahabul Ashfari', 'Laki-laki');
+INSERT INTO `penyewa` (`id`, `user_id`, `kode_penyewa`, `nama`, `alamat`, `email`, `no_telp`, `media_sosial`, `jenis_kelamin`) VALUES
+(4, 1, NULL, 'Riduwan', 'Jl. Tumapel Singosari', 'riduwan@gmail.com', '+62895366446634', 'Ridz Creator', 'Laki-laki'),
+(5, 1, NULL, 'Sahabul Ashfari', 'Jl. Rogonoto Timur no.235', 'ahmarsahab13@gmail.com', '089680895777', 'Sahabul Ashfari', 'Laki-laki'),
+(6, 1, NULL, 'Mansur', 'Dsn Gunung Rejo Kreweh', 'rusnammildcv47@gmail.com', '081335369331', 'mansurzip', 'Laki-laki'),
+(8, 1, NULL, 'bpk wedha', 'pakis', 'wedha@gmail.com', '087775242588', 'wedha', 'Laki-laki'),
+(9, 1, NULL, 'riza', 'jl sulfat', 'riza@gmail', '9788133', 'mansurzip', 'Laki-laki');
 
 -- --------------------------------------------------------
 
@@ -169,8 +179,14 @@ INSERT INTO `transaksi` (`id`, `user_id`, `penyewa_id`, `status_id`, `tanggal_pi
 (20, 1, 4, 2, '2021-05-05 21:41:00', 2, 'KTP,BPJS', '2021-05-09 22:12:01', NULL),
 (21, 1, 5, 2, '2021-04-14 22:36:00', 1, 'KTP,BPJS', '2021-05-09 22:12:05', NULL),
 (22, 1, 4, 2, '2020-05-08 21:03:00', 1, 'BPJS', '2021-05-09 22:12:09', NULL),
-(23, 1, 4, 2, '2021-06-16 22:19:00', 2, 'KTP,BPJS', NULL, NULL),
-(24, 1, 5, 1, '2021-05-11 22:21:00', 2, 'BPJS', NULL, NULL);
+(23, 1, 4, 2, '2021-06-16 22:19:00', 2, 'KTP,BPJS', '2021-05-19 23:30:09', NULL),
+(24, 1, 5, 1, '2021-05-11 22:21:00', 2, 'BPJS', '2021-05-19 23:30:04', NULL),
+(25, 1, 5, 2, '2021-05-12 17:14:00', 2, 'KTP KK', '2021-05-19 23:30:01', NULL),
+(26, 1, 4, 2, '2021-05-19 23:30:00', 1, 'KTP KK', '2021-06-10 09:22:42', NULL),
+(27, 1, 6, 2, '2021-06-10 09:21:00', 2, 'KTP', NULL, NULL),
+(29, 1, 8, 2, '2021-06-10 09:33:00', 3, 'KTP', '2021-06-10 09:50:44', NULL),
+(31, 1, 8, 1, '2021-06-10 09:36:00', 1, 'KTP', '2021-06-10 09:42:20', NULL),
+(33, 1, 6, 2, '2021-06-11 19:23:00', 1, 'KTP', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -202,6 +218,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `nama`, `tipe`) VALUES
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kode_barang` (`kode_barang`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `kategori_id` (`kategori_id`);
 
@@ -225,6 +242,8 @@ ALTER TABLE `kategori`
 --
 ALTER TABLE `penyewa`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nama` (`nama`),
+  ADD UNIQUE KEY `kode_penyewa` (`kode_penyewa`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -257,25 +276,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `barang_pinjam`
 --
 ALTER TABLE `barang_pinjam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `penyewa`
 --
 ALTER TABLE `penyewa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -287,7 +306,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `user`
