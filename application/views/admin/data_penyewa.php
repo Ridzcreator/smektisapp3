@@ -32,6 +32,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>Kode</th>
                                         <th>Nama</th>
                                         <th>E-mail</th>
                                         <th>Alamat</th>
@@ -48,6 +49,7 @@
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
+                                            <td><?= $p->kode_penyewa ?: '-'; ?></td>
                                             <td><?= $p->nama; ?></td>
                                             <td><?= $p->alamat; ?></td>
                                             <td><?= $p->email; ?></td>
@@ -153,10 +155,25 @@
                                                                 <a type="button" href="<?= $link_lokasi; ?>" class="btn btn-primary" target="_blank">Lihat Lokasi Penyewa</a>
 
                                                                 <?php
-                                                                $time_remain = $p->time_remain < 0 ? 'telat ' . $p->time_remain * -1 : 'tersisa ' . $p->time_remain;
-                                                                $time_remain = explode(" ", $time_remain);
-                                                                $time_remain = implode("%20", $time_remain);
-                                                                $message = "Hi, " . $p->nama . "%20%0A" . "%0ASekedar%20sekedar%20mengingatkan%2C%20limit%20waktu%20barang%20yang%20anda%20sewa%20" . $time_remain . "%20jam.%20%0Aharap%20dikembalikan%20tepat%20pada%20waktunya%20terimakasih.%0A%0AHormat%20Kami%2C%0ABee%20Movie%20Rent";
+                                                                $message = "";
+                                                                if (isset($p->time_remain)) {
+                                                                    $time_remain = $p->time_remain < 0 ? 'telat ' . $p->time_remain * -1 : 'tersisa ' . $p->time_remain;
+
+                                                                    $time_remain = explode(" ", $time_remain);
+
+                                                                    $time_remain = implode("%20", $time_remain);
+
+                                                                    if ($p->time_remain != "") {
+                                                                        $message = "Hi, " . $p->nama . "%20%0A" . "%0ASekedar%20mengingatkan%2C%20limit%20waktu%20barang%20yang%20anda%20sewa%20" . $time_remain . "%20jam.%0A%0ABerikut list barang:%0A";
+
+                                                                        foreach ($p->barang as $key => $barang) {
+                                                                            $message = $message . "- " . $barang->nama . " (x" . $barang->jumlah .")%0A";
+                                                                        }
+
+                                                                        $message = $message . "%0Aharap%20dikembalikan%20tepat%20pada%20waktunya%20terimakasih.%0AHormat%20Kami%2C%0ABee%20Movie%20Rent";
+                                                                    }
+                                                                }
+
                                                                 $p->no_telp = substr($p->no_telp, 0, 1) == '+' ? substr($p->no_telp, 1) : (substr($p->no_telp, 0, 1) == '0' ? '62' . substr($p->no_telp, 1) : $p->no_telp);
                                                                 $link = "https://api.whatsapp.com/send?phone=" . $p->no_telp . "&text=%20" . $message;
                                                                 ?>

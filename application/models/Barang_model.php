@@ -6,6 +6,7 @@ class Barang_model extends CI_Model
         $this->db->select('
         	barang.id as id,
         	barang.kategori_id as kategori_id,
+            barang.kode_barang,
         	barang.nama as nama,
         	barang.stok as stok,
         	(barang.stok - sum(case when transaksi.tanggal_kembali is null then barang_pinjam.jumlah else 0 end)) as status
@@ -23,6 +24,7 @@ class Barang_model extends CI_Model
     {
         $this->db->select('
 	        barang.id as b_id,
+            barang.kode_barang,
 	        barang.nama as nama_barang,
 	        barang.harga as harga,
 	        barang.stok as stok,

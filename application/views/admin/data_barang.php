@@ -34,6 +34,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>Kode</th>
                                         <th>Nama</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
@@ -50,6 +51,7 @@
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
+                                            <td><?= $b->kode_barang ?: '-'; ?></td>
                                             <td><?= $b->nama_barang; ?></td>
                                             <td><?= $b->harga; ?></td>
                                             <td>

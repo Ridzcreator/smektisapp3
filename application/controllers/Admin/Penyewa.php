@@ -19,6 +19,25 @@ class Penyewa extends CI_Controller
         $side['title'] = "Data Penyewa";
         $data['penyewa'] = $this->penyewa_model->getPenyewaNearTransaksi();
 
+        foreach ($data['penyewa'] as $key => $data_penyewa) {
+            $data_penyewa->barang = $this->penyewa_model->getPenyewaNearTransaksiDetail($data_penyewa->id, $data_penyewa->time_remain);
+        }
+
+        $data['other_penyewa'] = $this->penyewa_model->getPenyewaFreeTransaksi();
+
+        $penyewa_ids = [];
+        foreach ($data['penyewa'] as $key => $penyewa) {
+            array_push($penyewa_ids, $penyewa->id);
+        }
+
+        foreach ($data['other_penyewa'] as $key => $penyewa) {
+            if (!in_array($penyewa->id, $penyewa_ids)) {
+                array_push($data['penyewa'], $penyewa);
+            }
+        }
+
+        // return print("<pre>".print_r($data['penyewa'], true)."</pre>");
+
         $this->load->view('_include/sidebar', $side);
         $this->load->view('admin/data_penyewa', $data);
         $this->load->view('_include/footer');
@@ -56,7 +75,13 @@ class Penyewa extends CI_Controller
             'jenis_kelamin' => $this->input->post('jenis_kelamin'),
         );
 
-        $this->penyewa_model->create($inputpenyewa);
+        $id_penyewa = $this->penyewa_model->create($inputpenyewa);
+
+        $edit_penyewa = array(
+            'kode_penyewa' => strtoupper(substr($inputpenyewa['nama'], 0, 3) . $id_penyewa)
+        );
+
+        $this->penyewa_model->update($id_penyewa, $edit_penyewa);
 
         redirect('admin/penyewa/index');
     }

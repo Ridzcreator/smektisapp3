@@ -33,6 +33,10 @@ class Barang extends CI_Controller
 
     public function editbarang($b_id)
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         $inputbarang = array(
             'user_id' => $_SESSION['user_id'],
             'kategori_id' => $this->input->post('kategori_id'),
