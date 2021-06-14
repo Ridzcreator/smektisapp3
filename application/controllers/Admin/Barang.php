@@ -84,7 +84,7 @@ class Barang extends CI_Controller
 
         $this->kategori_model->create($get);
 
-        redirect('admin/barang/index');
+        redirect('admin/kategori/index');
     }
 
     public function destroy($id)

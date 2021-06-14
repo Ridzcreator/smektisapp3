@@ -97,6 +97,12 @@ if (session_status() == PHP_SESSION_NONE) {
         </a>
     </li>
     <li class="nav-item">
+        <a href="<?php echo base_url('admin/kategori'); ?>" class="nav-link <?= $title == 'Kategori Barang' ? 'active' : ''; ?>">
+            <i class="nav-icon fa fa-briefcase"></i>
+            <p> | Kategori Barang</p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="<?php echo base_url('admin/transaksi'); ?>" class="nav-link <?= $title == 'Data Transaksi' ? 'active' : ''; ?>">
             <i class="nav-icon fa fa-cart-plus"></i>
             <p> | Data Transaksi</p>
@@ -106,6 +112,12 @@ if (session_status() == PHP_SESSION_NONE) {
         <a href="<?php echo base_url('admin/penyewa'); ?>" class="nav-link <?= $title == 'Data Penyewa' ? 'active' : ''; ?>">
             <i class="nav-icon fa fa-address-card"></i>
             <p> | Data Penyewa</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="<?php echo base_url('admin/status'); ?>" class="nav-link <?= $title == 'status' ? 'active' : ''; ?>">
+            <i class="nav-icon fa fa-address-card"></i>
+            <p> | Status</p>
         </a>
     </li>
     <li class="nav-item">

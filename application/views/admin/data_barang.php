@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal"><i class="fa fa-plus-circle"></i> Tambah Barang</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal2"><i class="fa fa-plus-circle"></i> Tambah Kategori Barang</button>
+                            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal2"><i class="fa fa-plus-circle"></i> Tambah Kategori Barang</button> -->
                             <!-- <h3 class="card-title" style="width: 100%;"><marquee behavior="" direction="left">Ini info terbaru</marquee></h3> -->
                         </div>
                         <!-- /.card-header -->
@@ -34,11 +34,10 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Kode</th>
+                                        <th>Kode Barang</th>
                                         <th>Nama</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
-                                        <th>Kategori</th>
                                         <th>Keterangan</th>
                                         <!-- <th>Foto</th> -->
                                         <th>Aksi</th>
@@ -59,7 +58,6 @@
                                                     <?= $b->stok; ?>
                                                 </a>
                                             </td>
-                                            <td><?= $b->kategori_nama; ?></td>
                                             <td><?= $b->keterangan; ?></td>
                                             <!-- <td></td> -->
                                             <td class="d-flex justify-content-between">
@@ -235,7 +233,7 @@
             </div>
         </div>
         <!-- Tambah Kategori Modal  -->
-        <div class="modal fade" id="tambahModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="tambahModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -256,7 +254,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- end modal kategori -->
 
     </section>
