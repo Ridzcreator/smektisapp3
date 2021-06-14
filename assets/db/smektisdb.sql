@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2021 at 02:55 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 7.4.19
+-- Generation Time: Jun 14, 2021 at 02:33 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,7 +48,9 @@ INSERT INTO `barang` (`id`, `user_id`, `kategori_id`, `kode_barang`, `nama`, `ha
 (2, 1, 1, NULL, 'Sony A7ii', 250000, 5, 'Boleh dipinjam kapan saja', '0'),
 (11, 1, 2, NULL, 'Godox', 80000, 4, 'Lampu Flash', NULL),
 (12, 1, 2, NULL, 'LED 500 Watt', 150000, 3, 'lampu Terang benerang', NULL),
-(59, 1, 6, NULL, 'ximatec', 15000, 1, 'biasa', NULL);
+(59, 1, 6, NULL, 'ximatec', 15000, 1, 'biasa', NULL),
+(60, 1, 1, 'CN001', 'Canon100D', 150000, 1, 'asdda', NULL),
+(64, 1, 1, 'CN002', 'EOS 70D', 300000, 4, 'wwww', NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +134,8 @@ INSERT INTO `penyewa` (`id`, `user_id`, `kode_penyewa`, `nama`, `alamat`, `email
 (5, 1, NULL, 'Sahabul Ashfari', 'Jl. Rogonoto Timur no.235', 'ahmarsahab13@gmail.com', '089680895777', 'Sahabul Ashfari', 'Laki-laki'),
 (6, 1, NULL, 'Mansur', 'Dsn Gunung Rejo Kreweh', 'rusnammildcv47@gmail.com', '081335369331', 'mansurzip', 'Laki-laki'),
 (8, 1, NULL, 'bpk wedha', 'pakis', 'wedha@gmail.com', '087775242588', 'wedha', 'Laki-laki'),
-(9, 1, NULL, 'riza', 'jl sulfat', 'riza@gmail', '9788133', 'mansurzip', 'Laki-laki');
+(9, 1, NULL, 'riza', 'jl sulfat', 'riza@gmail', '9788133', 'mansurzip', 'Laki-laki'),
+(12, 1, 'BAM12', 'bambang', 'jl kramat gg mawar hitam', 'artusima7@gmail.com', '6281335369331', 'bambangcuy', 'Laki-laki');
 
 -- --------------------------------------------------------
 
@@ -276,7 +279,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `barang_pinjam`
@@ -294,7 +297,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `penyewa`
 --
 ALTER TABLE `penyewa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `status`

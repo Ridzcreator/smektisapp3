@@ -80,9 +80,10 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="<?php echo base_url('admin/barang/editbarang/' . $b->b_id); ?>" method="post">
+
                                                             <div class="form-group">
                                                                 <label for="nama_barang">Nama Barang</label>
-                                                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)" value="<?= $b->nama_barang; ?>">
+                                                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan nama barang" value="<?= $b->nama_barang; ?>">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="penyewa">Harga Barang</label>
@@ -180,8 +181,12 @@
                     <div class="modal-body">
                         <form action="<?php echo base_url('admin/barang/tambahbarang'); ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="nama_barang">Kode Barang</label>
+                                <input type="text" class="form-control" name="kode_barang" placeholder="Masukkan kode barang" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="nama_barang">Nama Barang</label>
-                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan jaminan (contoh: KTP,BPJS)" required>
+                                <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan nama barang" required>
                             </div>
                             <div class="form-group">
                                 <label for="penyewa">Harga Barang</label>

@@ -36,7 +36,7 @@ class Barang extends CI_Controller
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        
+
         $inputbarang = array(
             'user_id' => $_SESSION['user_id'],
             'kategori_id' => $this->input->post('kategori_id'),
@@ -60,6 +60,7 @@ class Barang extends CI_Controller
         $get = array(
             'user_id' => $_SESSION['user_id'],
             'kategori_id' => $this->input->post('kategori_id'),
+            'kode_barang' => $this->input->post('kode_barang'),
             'nama' => $this->input->post('nama_barang'),
             'harga' => $this->input->post('harga_barang'),
             'stok' => $this->input->post('stok_barang'),
