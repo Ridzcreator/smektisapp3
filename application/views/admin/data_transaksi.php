@@ -37,7 +37,7 @@
                                         <th>Barang Disewa</th>
                                         <th>Tanggal Sewa/Pinjam</th>
                                         <th>Tanggal Kembali</th>
-                                        <th>Status</th>
+                                        <!-- <th>Status</th> -->
                                         <th>Alamat</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -64,7 +64,7 @@
                                             </td>
                                             <td><?= date("d/m/Y H:i:s", strtotime($data->tanggal_pinjam)); ?></td>
                                             <td><?= date("d/m/Y H:i:s", strtotime('+' . ($data->durasi * 24) . ' hours', strtotime($data->tanggal_pinjam))); ?></td>
-                                            <td><?= $data->status_nama; ?></td>
+                                            <!-- <td><?= $data->status_nama; ?></td> -->
                                             <td><?= $data->alamat; ?></td>
                                             <td class="d-flex justify-content-between">
                                                 <a class="text-link text-dark" href="<?php echo base_url('admin/transaksi/nota/' . $data->t_id); ?>" title="Print" target="_blank">
