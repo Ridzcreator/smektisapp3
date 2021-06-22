@@ -23,7 +23,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal"><i class="fa fa-plus-circle"></i> Tambah</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal"><i class="fa fa-plus-circle"></i> Tambah Penyewa</button>
                             <!-- <h3 class="card-title" style="width: 100%;"><marquee behavior="" direction="left">Ini info terbaru</marquee></h3> -->
                         </div>
                         <!-- /.card-header -->
@@ -167,7 +167,7 @@
                                                                         $message = "Hi, " . $p->nama . "%20%0A" . "%0ASekedar%20mengingatkan%2C%20limit%20waktu%20barang%20yang%20anda%20sewa%20" . $time_remain . "%20jam.%0A%0ABerikut list barang:%0A";
 
                                                                         foreach ($p->barang as $key => $barang) {
-                                                                            $message = $message . "- " . $barang->nama . " (x" . $barang->jumlah .")%0A";
+                                                                            $message = $message . "- " . $barang->nama . " (x" . $barang->jumlah . ")%0A";
                                                                         }
 
                                                                         $message = $message . "%0Aharap%20dikembalikan%20tepat%20pada%20waktunya%20terimakasih.%0AHormat%20Kami%2C%0ABee%20Movie%20Rent";

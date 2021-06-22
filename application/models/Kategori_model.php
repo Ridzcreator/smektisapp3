@@ -32,4 +32,10 @@ class Kategori_model extends CI_Model
 
         return $insert_id;
     }
+
+    public function update($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('kategori', $data);
+    }
 }

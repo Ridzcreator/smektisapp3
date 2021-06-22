@@ -78,11 +78,17 @@ class Barang extends CI_Controller
             session_start();
         }
 
-        $get = array(
+        $tambahkategori = array(
             'nama' => $this->input->post('kategori_nama'),
         );
 
-        $this->kategori_model->create($get);
+        $id_kategori = $this->kategori_model->create($tambahkategori);
+
+        $edit_kategori_barang = array(
+            'kode_kategori' => strtoupper(substr($tambahkategori['nama'], 0, 3) . $id_kategori)
+        );
+
+        $this->kategori_model->update($id_kategori, $edit_kategori_barang);
 
         redirect('admin/kategori/index');
     }

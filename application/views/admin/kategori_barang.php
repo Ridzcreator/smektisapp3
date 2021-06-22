@@ -33,6 +33,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>Kode Kategori</th>
                                         <th>Nama</th>
                                     </tr>
                                 </thead>
@@ -43,6 +44,7 @@
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
+                                            <td><?= $k->kode_kategori ?: '-'; ?></td>
                                             <td><?= $k->nama; ?></td>
                                         </tr>
                                     <?php } ?>

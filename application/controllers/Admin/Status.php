@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Status extends CI_Controller
 {
@@ -21,7 +21,7 @@ class Status extends CI_Controller
         // verifikasi apakah user sudah login
         $this->auth->isLoggedIn();
 
-        $side['title'] = "Kategori Barang";
+        $side['title'] = "Status";
 
         $data['master_status'] = $this->status_model->getMaster();
 
@@ -30,6 +30,24 @@ class Status extends CI_Controller
         $this->load->view('_include/footer');
     }
 
-}
+    public function tambahstatus()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-?>
+        $tambahstatus = array(
+            'nama' => $this->input->post('status_nama'),
+        );
+
+        $id_status = $this->status_model->create($tambahstatus);
+
+        $edit_status = array(
+            'kode_status' => strtoupper(substr($tambahstatus['nama'], 0, 3) . $id_status)
+        );
+
+        $this->status_model->update($id_status, $edit_status);
+
+        redirect('admin/status/index');
+    }
+}

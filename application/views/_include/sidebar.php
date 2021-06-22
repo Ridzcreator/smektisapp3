@@ -82,134 +82,134 @@ if (session_status() == PHP_SESSION_NONE) {
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-<!-- Add icons to the links using the .nav-icon class
+                        <!-- Add icons to the links using the .nav-icon class
     with font-awesome or any other icon font library -->
-    <li class="nav-item">
-        <a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link <?= $title == 'Dashboard' ? 'active' : ''; ?>">
-            <i class="nav-icon fa fa-home"></i>
-            <p> | Dashboard</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="<?php echo base_url('admin/barang'); ?>" class="nav-link <?= $title == 'Data Barang' ? 'active' : ''; ?>">
-            <i class="nav-icon fa fa-briefcase"></i>
-            <p> | Data Barang</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="<?php echo base_url('admin/kategori'); ?>" class="nav-link <?= $title == 'Kategori Barang' ? 'active' : ''; ?>">
-            <i class="nav-icon fa fa-briefcase"></i>
-            <p> | Kategori Barang</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="<?php echo base_url('admin/transaksi'); ?>" class="nav-link <?= $title == 'Data Transaksi' ? 'active' : ''; ?>">
-            <i class="nav-icon fa fa-cart-plus"></i>
-            <p> | Data Transaksi</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="<?php echo base_url('admin/penyewa'); ?>" class="nav-link <?= $title == 'Data Penyewa' ? 'active' : ''; ?>">
-            <i class="nav-icon fa fa-address-card"></i>
-            <p> | Data Penyewa</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="<?php echo base_url('admin/status'); ?>" class="nav-link <?= $title == 'status' ? 'active' : ''; ?>">
-            <i class="nav-icon fa fa-address-card"></i>
-            <p> | Status</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="<?php echo base_url('admin/laporan'); ?>" class="nav-link <?= $title == 'Laporan' ? 'active' : ''; ?>">
-            <i class="nav-icon fa fa-file"></i>
-            <p> | Laporan</p>
-        </a>
-    </li>
-</ul>
-</nav>
-<!-- /.sidebar-menu -->
-</div>
-<!-- /.sidebar -->
-</aside>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link <?= $title == 'Dashboard' ? 'active' : ''; ?>">
+                                <i class="nav-icon fa fa-home"></i>
+                                <p> | Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/barang'); ?>" class="nav-link <?= $title == 'Data Barang' ? 'active' : ''; ?>">
+                                <i class="nav-icon fa fa-briefcase"></i>
+                                <p> | Data Barang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/kategori'); ?>" class="nav-link <?= $title == 'Kategori Barang' ? 'active' : ''; ?>">
+                                <i class="nav-icon fa fa-briefcase"></i>
+                                <p> | Kategori Barang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/transaksi'); ?>" class="nav-link <?= $title == 'Data Transaksi' ? 'active' : ''; ?>">
+                                <i class="nav-icon fa fa-cart-plus"></i>
+                                <p> | Data Transaksi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/penyewa'); ?>" class="nav-link <?= $title == 'Data Penyewa' ? 'active' : ''; ?>">
+                                <i class="nav-icon fa fa-address-card"></i>
+                                <p> | Data Penyewa</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/status'); ?>" class="nav-link <?= $title == 'Status' ? 'active' : ''; ?>">
+                                <i class="nav-icon fa fa-address-card"></i>
+                                <p> | Status</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/laporan'); ?>" class="nav-link <?= $title == 'Laporan' ? 'active' : ''; ?>">
+                                <i class="nav-icon fa fa-file"></i>
+                                <p> | Laporan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
 
-<script type="text/javascript">
-    var data_transaksi = [];
-    var data_penyewa = [];
-    <?php
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $dbname = 'smektisdb';
+        <script type="text/javascript">
+            var data_transaksi = [];
+            var data_penyewa = [];
+            <?php
+            $servername = 'localhost';
+            $username = 'root';
+            $password = '';
+            $dbname = 'smektisdb';
 
-    // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-        if ($conn->connect_error) {
-            die('Connection failed: ' . $conn->connect_error);
-        }
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            // Check connection
+            if ($conn->connect_error) {
+                die('Connection failed: ' . $conn->connect_error);
+            }
 
-        $sql_penyewa = "
+            $sql_penyewa = "
                 SELECT
                 *
                 FROM penyewa
             ";
-        $result_penyewa = $conn->query($sql_penyewa);
+            $result_penyewa = $conn->query($sql_penyewa);
 
-        $data_penyewa = array();
+            $data_penyewa = array();
 
-        $sql = "
+            $sql = "
                 SELECT
                 *,
                 TIMESTAMPDIFF(HOUR,NOW(), DATE_ADD(tanggal_pinjam, INTERVAL durasi DAY)) AS hour,
                 TIMESTAMPDIFF(MINUTE,NOW(), DATE_ADD(tanggal_pinjam, INTERVAL durasi DAY)) AS minute
                 FROM transaksi
             ";
-        $result = $conn->query($sql);
+            $result = $conn->query($sql);
 
-        $data_transaksi = array();
+            $data_transaksi = array();
 
-        if ($result_penyewa->num_rows > 0) {
-    // output data of each row
-            while ($row_penyewa = $result_penyewa->fetch_assoc()) {
-                array_push($data_penyewa, $row_penyewa);
+            if ($result_penyewa->num_rows > 0) {
+                // output data of each row
+                while ($row_penyewa = $result_penyewa->fetch_assoc()) {
+                    array_push($data_penyewa, $row_penyewa);
+                }
             }
-        }
 
-        if ($result->num_rows > 0) {
-    // output data of each row
-            while ($row = $result->fetch_assoc()) {
-                array_push($data_transaksi, $row);
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    array_push($data_transaksi, $row);
+                }
             }
-        }
 
-        echo "data_penyewa = " . json_encode($data_penyewa) . ";";
-        echo "data_transaksi = " . json_encode($data_transaksi) . ";";
+            echo "data_penyewa = " . json_encode($data_penyewa) . ";";
+            echo "data_transaksi = " . json_encode($data_transaksi) . ";";
 
-        $conn->close();
-    ?>
+            $conn->close();
+            ?>
 
-    var notifikasi = "";
-    var notifikasiLength = 0;
-    var transaksi_type = "";
+            var notifikasi = "";
+            var notifikasiLength = 0;
+            var transaksi_type = "";
 
-    data_transaksi.forEach(function(transaksi) {
-        if (transaksi.hour <= 100 && !transaksi.tanggal_kembali) {
-            data_penyewa.forEach(function(penyewa) {
-                if (penyewa.id == transaksi.penyewa_id) {
-                    if (transaksi.hour != 0) {
-                        transaksi_type = (transaksi.hour < 0 ? "text-danger" : "text-muted") + "'>" + (transaksi.hour > 0 ? transaksi.hour : "telat " + (transaksi.hour * -1)) + " jam";
-                    } else {
-                        transaksi_type = (transaksi.minute >= 0 ? "text-muted'" + '>' + transaksi.minute : "text-danger'" + ">telat " + (transaksi.minute * -1)) + " menit";
-                    }
-                    notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-sm " + transaksi_type + "</span></a><div class='dropdown-divider'></div>";
-                    notifikasiLength++;
+            data_transaksi.forEach(function(transaksi) {
+                if (transaksi.hour <= 100 && !transaksi.tanggal_kembali) {
+                    data_penyewa.forEach(function(penyewa) {
+                        if (penyewa.id == transaksi.penyewa_id) {
+                            if (transaksi.hour != 0) {
+                                transaksi_type = (transaksi.hour < 0 ? "text-danger" : "text-muted") + "'>" + (transaksi.hour > 0 ? transaksi.hour : "telat " + (transaksi.hour * -1)) + " jam";
+                            } else {
+                                transaksi_type = (transaksi.minute >= 0 ? "text-muted'" + '>' + transaksi.minute : "text-danger'" + ">telat " + (transaksi.minute * -1)) + " menit";
+                            }
+                            notifikasi += "<a href='' class='dropdown-item'><i class='fas fa-users mr-2'></i> " + penyewa.nama + "<span class='float-right text-sm " + transaksi_type + "</span></a><div class='dropdown-divider'></div>";
+                            notifikasiLength++;
+                        }
+                    });
                 }
             });
-        }
-    });
 
-    document.getElementById('jumlah_notifikasi_small').textContent = notifikasiLength;
-    document.getElementById('jumlah_notifikasi').textContent = notifikasiLength;
-    document.getElementById('list_notifikasi').innerHTML = notifikasi;
-</script>
+            document.getElementById('jumlah_notifikasi_small').textContent = notifikasiLength;
+            document.getElementById('jumlah_notifikasi').textContent = notifikasiLength;
+            document.getElementById('list_notifikasi').innerHTML = notifikasi;
+        </script>
